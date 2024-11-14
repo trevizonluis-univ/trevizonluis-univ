@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORARIOS</title>
+</head>
+<body>
+    <p>Escoja su carrera</p>
+    <select name="carrera" id="carrera">
+        <option value="n/a">N/A</option>
+        <option value="economia">Economia</option>
+        <option value="administracion">Administracion</option>
+        <option value="contaduria">Contaduria</option>
+    </select>
+    <p>Escoja su semestre</p> 
+    <select name="semestre" id="semestre">
+        <option value="n/a">N/A</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+    <button id="boton" onclick="prueba()">Ver horarios</button>
+    <script>
+        function prueba(){
+            console.log(document.getElementById("carrera").value);
+            console.log(document.getElementById("semestre").value);
+            console.log("viva la vida")
+            
+        }
+    </script>
+</body>
+</html>
