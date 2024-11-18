@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORARIOS</title>
+</head>
+
+<body>
+    <p>Escoja su carrera</p>
+    <select name="carrera" id="carreras">
+        <option value="n/a">N/A</option>
+        <option value="economia">Economia</option>
+        <option value="administracion">Administracion</option>
+        <option value="contaduria">Contaduria</option>
+    </select>
+    <p>Escoja su semestre</p>
+    <select name="semestre" id="semestres">
+        <option value="n/a">N/A</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+    <button id="boton" onclick="prueba()">Ver horarios</button>
+    <button id="boton" onclick="prueba_2()">Limpiar</button>
+    <p id="horarios"></p>
+    <script>
+        var economia_1 = [
+            "m01", "m02", "t01"
+        ]
+        var economia_3 = [
+            "m01", "t01"
+        ]
+        function prueba_2() {
+            document.getElementById("horarios").innerHTML = ""
+        }
+        function prueba() {
+            var carrera = document.getElementById("carreras").value
+            var nro_semestre = document.getElementById("semestres").value
+            var semestre = nro_semestre + "_semestre"
+            console.log(src)
+            if (carrera == "economia") {
+                if (nro_semestre == "1" || nro_semestre == "2") {
+                    var src = []
+                    for (var i = 0; i < economia_1.length; i++) {
+                        src.push("horarios/" + carrera + "/" + semestre + "/" + economia_1[i] + ".png")
+                    }
+                    for (var i = 0; i < economia_1.length; i++) {
+                        document.getElementById("horarios").innerHTML += "<img src=" + src[i] + "><hr>"
+                    }
+                } else if (nro_semestre >= "3" && nro_semestre <= "9") {
+                    var src = []
+                    for (var i = 0; i < economia_3.length; i++) {
+                        src.push("horarios/" + carrera + "/" + semestre + "/" + economia_3[i] + ".png")
+                    }
+                    for (var i = 0; i < economia_3.length; i++) {
+                        document.getElementById("horarios").innerHTML += "<img src=" + src[i] + "><hr>"
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
