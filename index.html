@@ -32,38 +32,93 @@
     <button id="boton" onclick="prueba_2()">Limpiar</button>
     <p id="horarios"></p>
     <script>
+
         var economia_1 = [
             "m01", "m02", "t01"
         ]
         var economia_3 = [
             "m01", "t01"
         ]
+        var administracion_contaduria_1 = [
+            "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "t01", "t02", "t03", "n01", "n02"
+        ]
+        var administracion_contaduria_2 = [
+            "m01", "m02", "m03", "m04", "t01", "t02", "t03", "n01", "n02", "n03"
+        ]
+        var administracion_contaduria_3 = [
+            "m01", "m02", "m03", "t01", "t02", "n01", "n02"
+        ]
+        var administracion_contaduria_4 = [
+            "m01", "m02", "m03", "t01", "n01", "n02"
+        ]
+        var administracion_contaduria_5 = [
+            "m01", "m02", "m03", "n01", "n02", "n03"
+        ]
         function prueba_2() {
             document.getElementById("horarios").innerHTML = ""
         }
         function prueba() {
+            var src = []
             var carrera = document.getElementById("carreras").value
             var nro_semestre = document.getElementById("semestres").value
             var semestre = nro_semestre + "_semestre"
             console.log(src)
             if (carrera == "economia") {
                 if (nro_semestre == "1" || nro_semestre == "2") {
-                    var src = []
                     for (var i = 0; i < economia_1.length; i++) {
                         src.push("horarios/" + carrera + "/" + semestre + "/" + economia_1[i] + ".png")
                     }
                     for (var i = 0; i < economia_1.length; i++) {
-                        document.getElementById("horarios").innerHTML += "<img src=" + src[i] + "><hr>"
+                        document.getElementById("horarios").innerHTML += economia_1[i].toUpperCase() + "<br><img src=" + src[i] + "><hr>"
                     }
                 } else if (nro_semestre >= "3" && nro_semestre <= "9") {
-                    var src = []
                     for (var i = 0; i < economia_3.length; i++) {
                         src.push("horarios/" + carrera + "/" + semestre + "/" + economia_3[i] + ".png")
                     }
                     for (var i = 0; i < economia_3.length; i++) {
-                        document.getElementById("horarios").innerHTML += "<img src=" + src[i] + "><hr>"
+                        document.getElementById("horarios").innerHTML += economia_3[i].toUpperCase() + "<br><img src=" + src[i] + "><hr>"
                     }
                 }
+            } else if ((carrera == "administracion" || carrera == "contaduria") && (nro_semestre >= "1" && nro_semestre <= "5")) {
+                carrera = "administracion_contaduria"
+                if (nro_semestre == "1") {
+                    for (var i = 0; i < administracion_contaduria_1.length; i++) {
+                        src.push("horarios/" + carrera + "/" + semestre + "/" + administracion_contaduria_1[i] + ".png")
+                    }
+                    for (var i = 0; i < administracion_contaduria_1.length; i++) {
+                        document.getElementById("horarios").innerHTML += administracion_contaduria_1[i].toUpperCase() + "<br><img src=" + src[i] + "><hr>"
+                    }
+                } else if (nro_semestre == "2") {
+                    for (var i = 0; i < administracion_contaduria_2.length; i++) {
+                        src.push("horarios/" + carrera + "/" + semestre + "/" + administracion_contaduria_2[i] + ".png")
+                    }
+                    for (var i = 0; i < administracion_contaduria_2.length; i++) {
+                        document.getElementById("horarios").innerHTML += administracion_contaduria_2[i].toUpperCase() + "<br><img src=" + src[i] + "><hr>"
+                    }
+                } else if (nro_semestre == "3") {
+                    for (var i = 0; i < administracion_contaduria_3.length; i++) {
+                        src.push("horarios/" + carrera + "/" + semestre + "/" + administracion_contaduria_3[i] + ".png")
+                    }
+                    for (var i = 0; i < administracion_contaduria_3.length; i++) {
+                        document.getElementById("horarios").innerHTML += administracion_contaduria_3[i].toUpperCase() + "<br><img src=" + src[i] + "><hr>"
+                    }
+                } else if (nro_semestre == "4") {
+                    for (var i = 0; i < administracion_contaduria_4.length; i++) {
+                        src.push("horarios/" + carrera + "/" + semestre + "/" + administracion_contaduria_4[i] + ".png")
+                    }
+                    for (var i = 0; i < administracion_contaduria_4.length; i++) {
+                        document.getElementById("horarios").innerHTML += administracion_contaduria_4[i].toUpperCase() + "<br><img src=" + src[i] + "><hr>"
+                    }
+                } else if (nro_semestre == "5") {
+                    for (var i = 0; i < administracion_contaduria_5.length; i++) {
+                        src.push("horarios/" + carrera + "/" + semestre + "/" + administracion_contaduria_5[i] + ".png")
+                    }
+                    for (var i = 0; i < administracion_contaduria_5.length; i++) {
+                        document.getElementById("horarios").innerHTML += administracion_contaduria_5[i].toUpperCase() + "<br><img src=" + src[i] + "><hr>"
+                    }
+                }
+            } else if (carrera == "n/a") {
+                alert("Seleccione una carrera")
             }
         }
     </script>
