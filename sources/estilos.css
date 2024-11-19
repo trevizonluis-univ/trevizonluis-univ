@@ -1,0 +1,123 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    /* Color de fondo claro */
+}
+
+.header {
+    background-color: #E6F0FF;
+    /* Azul oscuro */
+    color: black;
+    /* Color del texto */
+    text-align: center;
+    /* Centrar el texto */
+    padding: 20px;
+    /* Espaciado interno */
+}
+
+s
+
+.title {
+    font-size: 2em;
+    /* Tamaño del título */
+    margin: 10px 0;
+    /* Margen superior e inferior */
+    margin: 0 20px; 
+}
+
+.main-content {
+    padding: 20px;
+    text-align: center;
+    /* Centrar el contenido principal */
+}
+
+form {
+    margin-bottom: 20px;
+    /* Espacio debajo del formulario */
+}
+
+label {
+    display: block;
+    /* Cada etiqueta en una nueva línea */
+    margin-bottom: 5px;
+    /* Espacio debajo de cada etiqueta */
+}
+
+select {
+    margin-bottom: 15px;
+    /* Espacio debajo de cada select */
+    padding: 8px;
+    width: 200px;
+    /* Ancho fijo para los selectores */
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    /* Azul para el botón */
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    margin-left: 0px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    /* Color más oscuro al pasar el mouse */
+}
+
+.logo-container {
+    display: flex; /* Usar flexbox para alinear los logos */
+    justify-content: space-between; /* Espacio entre los logos */
+    align-items: center; /* Centrar verticalmente los logos */
+}
+
+.left-logos {
+    display: flex;
+}
+
+.logo {
+    max-width: 150px; /* Ancho máximo para los logos */
+    margin-bottom: 10px; /* Espacio entre los logos apilados */
+    margin: 10px;
+}
+
+.right-logo {
+    margin-left: 20px;
+    margin-right: 0px /* Espacio entre el logo derecho y los de la izquierda */
+}
+
+.resultados {
+    margin-top: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    /* Fondo claro */
+}
+
+.main-content {
+    text-align: left;
+    /* Centrar texto en el contenedor principal */
+    padding: 20px;
+}
+
+.resultados {
+    margin-top: 20px;
+    /* Espacio arriba del div de resultados */
+}
+
+#horarios {
+    text-align: center;
+    /* Centrar contenido dentro del div */
+}
+
+img {
+    display: block;
+    /* Hacer que las imágenes sean bloques */
+    margin: 0 auto;
+    /* Centrar imágenes horizontalmente */
+}

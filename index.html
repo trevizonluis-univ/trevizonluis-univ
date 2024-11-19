@@ -4,33 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sources/estilos.css">
     <title>HORARIOS</title>
 </head>
+<header class="header">
+    <div class="logo-container">
+        <div class="left-logos">
+            <img src="logos/ucla.jpg" style="width: 100px;" alt="Logo Izquierdo" class="logo">
+            <img src="logos/dcee.jpg"style="width: 100px;" alt="Logo Izquierdo 2" class="logo">
+        </div>
+        <h1 class="title">Horarios UCLA 2024-2</h1>
+        <img class="logo right-logo" width="158px" src="logos\miles blanco.png" alt="Logo Derecho">
+    </div>
+
+</header>
 
 <body>
-    <p>Escoja su carrera</p>
-    <select name="carrera" id="carreras">
-        <option value="n/a">N/A</option>
-        <option value="economia">Economia</option>
-        <option value="administracion">Administracion</option>
-        <option value="contaduria">Contaduria</option>
-    </select>
-    <p>Escoja su semestre</p>
-    <select name="semestre" id="semestres">
-        <option value="n/a">N/A</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-    </select>
-    <button id="boton" onclick="prueba()">Ver horarios</button>
-    <button id="boton" onclick="prueba_2()">Limpiar</button>
-    <p id="horarios"></p>
+    <main class="main-content">
+        <p>Escoja su carrera</p>
+        <select name="carrera" id="carreras">
+            <option value="n/a">N/A</option>
+            <option value="economia">Economia</option>
+            <option value="administracion">Administracion</option>
+            <option value="contaduria">Contaduria</option>
+        </select>
+        <p>Escoja su semestre</p>
+        <select name="semestre" id="semestres">
+            <option value="n/a">N/A</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        <br>
+        <button id="boton" onclick="prueba()">Ver horarios</button>
+        <br>
+        <button id="boton" onclick="prueba_2()">Limpiar</button>
+        <div id="resultados" class="resultados">
+            <p id="horarios"></p>
+        </div>
+    </main>
+
     <script>
 
         var economia_1 = [
@@ -67,7 +86,7 @@
             "m01", "m02", "m03", "n01", "n02", "n03"
         ]
         var administracion_9 = [
-            "m01","m02","m03","t01","n01","n03"
+            "m01", "m02", "m03", "t01", "n01", "n03"
         ]
         function prueba_2() {
             document.getElementById("horarios").innerHTML = ""
