@@ -6,7 +6,7 @@ body {
 }
 
 .header {
-    background-color: #E6F0FF;
+    background-color: #87CEEB;
     /* Azul oscuro */
     color: black;
     /* Color del texto */
@@ -91,12 +91,6 @@ button:hover {
 
 .resultados {
     margin-top: 20px;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    /* Fondo claro */
 }
 
 .main-content {
