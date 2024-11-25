@@ -47,25 +47,7 @@
         <button id="boton" onclick="getHorario()">Ver horarios</button>
         <br>
         <button id="boton" onclick="limpiar()">Limpiar</button>
-        <div class="resultados">
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            Numero de Semestre
-                        </th>
-                        <th>
-                            Seccion
-                        </th>
-                        <th>
-                            Horario
-                        </th>
-                    </tr>
-
-                </thead>
-                <tbody id="horarios">
-                </tbody>
-            </table>
+        <div class="resultados" id="horarios">
         </div>
     </main>
 
@@ -150,7 +132,7 @@
                 }
                 agregar_src(src, carrera, semestre, especifico)
                 for (let i = 0; i < especifico.length; i++) {
-                    document.getElementById("horarios").innerHTML += `<tr><td>${nro_semestre} semestre</td><td>${especifico[i].toUpperCase()}</td><td><img src=${src[i]}></td></tr>`
+                    document.getElementById("horarios").innerHTML += `<p>${especifico[i].toUpperCase()}</p><br><img src=${src[i]}><hr>`
                 }
             }
             src = []
