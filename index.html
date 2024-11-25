@@ -22,8 +22,7 @@
 <body>
     <main class="main-content">
         <h4 style="text-align: center;">SE DEBE UTILIZAR EL BOTON DE "LIMPIAR" PARA VER MEJOR LOS RESULTADOS <br>SINO
-            HABRA
-            CONFUNSIONES Y MALENTENDIDOS</h4>
+            HABRA CONFUSIONES Y MALENTENDIDOS</h4>
         <p>Escoja su carrera</p>
         <select name="carrera" id="carreras">
             <option value="n/a">N/A</option>
@@ -45,10 +44,28 @@
             <option value="9">9</option>
         </select>
         <br>
-        <button id="boton" onclick="prueba()">Ver horarios</button>
+        <button id="boton" onclick="getHorario()">Ver horarios</button>
         <br>
-        <button id="boton" onclick="prueba_2()">Limpiar</button>
-        <div id="horarios" class="resultados">
+        <button id="boton" onclick="limpiar()">Limpiar</button>
+        <div class="resultados">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Numero de Semestre
+                        </th>
+                        <th>
+                            Seccion
+                        </th>
+                        <th>
+                            Horario
+                        </th>
+                    </tr>
+
+                </thead>
+                <tbody id="horarios">
+                </tbody>
+            </table>
         </div>
     </main>
 
@@ -96,41 +113,44 @@
             administracion_contaduria_4, administracion_contaduria_5, administracion_contaduria_6,
             administracion_contaduria_7, administracion_contaduria_8, contaduria_9, administracion_9
         }
-        function prueba_2() {
-            document.getElementById("horarios").innerHTML = "<table id='horarios'></table>"
+        function limpiar() {
+            document.getElementById("horarios").innerHTML = ""
         }
-        function verificaciones(carrera, nro_semestre) {
-            var acomodar_c = carrera
-            var acomodar_nro = nro_semestre
-            if ((carrera == "administracion" || carrera == "contaduria") && nro_semestre < 9) {
-                acomodar_c = "administracion_contaduria"
+        function getSemesterKey(carrera, nroSemestre) {
+            let carreraAcomodada = carrera;
+            let nroSemestreAcomodado = nroSemestre;
+            if (carrera === "administracion" || carrera === "contaduria") {
+                if (nroSemestre < 9) {
+                    carreraAcomodada = "administracion_contaduria";
+                }
+            } else if (carrera === "economia") {
+                if (nroSemestre >= 3) {
+                    nroSemestreAcomodado = 2;
+                } else {
+                    nroSemestreAcomodado = 1;
+                }
             }
-            if (carrera == "economia" && nro_semestre >= 3) {
-                acomodar_nro = "2"
-            } else if (carrera == "economia" && nro_semestre < 3) {
-                acomodar_nro = "1"
-            }
-            return acomodar_c + "_" + acomodar_nro
+            return `${carreraAcomodada}_${nroSemestreAcomodado}`;
         }
         function agregar_src(arr, carrera, semestre, variable) {
             for (let i = 0; i < variable.length; i++) {
                 arr.push("horarios/" + carrera + "/" + semestre + "/" + variable[i] + ".png")
             }
         }
-        function prueba() {
+        function getHorario() {
             var carrera = document.getElementById("carreras").value
             var nro_semestre = document.getElementById("semestres").value
             var semestre = nro_semestre + "_semestre"
             if (carrera == "n/a" || nro_semestre == "n/a") {
                 alert("Escoge un semestre y/o carrera")
             } else {
-                var especifico = semestres_totales[(verificaciones(carrera, nro_semestre))]
+                var especifico = semestres_totales[(getSemesterKey(carrera, nro_semestre))]
                 if ((carrera == "administracion" || carrera == "contaduria") && nro_semestre <= 5) {
                     carrera = "administracion_contaduria"
                 }
                 agregar_src(src, carrera, semestre, especifico)
                 for (let i = 0; i < especifico.length; i++) {
-                    document.getElementById("horarios").innerHTML += "<p>" + especifico[i].toUpperCase() + "</p>" + "<br><img src=" + src[i] + "><hr>"
+                    document.getElementById("horarios").innerHTML += `<tr><td>${nro_semestre} semestre</td><td>${especifico[i].toUpperCase()}</td><td><img src=${src[i]}></td></tr>`
                 }
             }
             src = []
