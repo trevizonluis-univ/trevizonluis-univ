@@ -23,14 +23,14 @@
     <main class="main-content">
         <h4 style="text-align: center;">SE DEBE UTILIZAR EL BOTON DE "LIMPIAR" PARA VER MEJOR LOS RESULTADOS <br>PUEDEN
             HABER CONFUSIONES Y MALENTENDIDOS</h4>
-        <p>Escoja su carrera</p>
+        <label>Escoja su carrera</label>
         <select name="carrera" id="carreras">
             <option value="n/a">N/A</option>
             <option value="economia">Economia</option>
             <option value="administracion">Administracion</option>
             <option value="contaduria">Contaduria</option>
         </select>
-        <p>Escoja su semestre</p>
+        <label>Escoja su semestre</label>
         <select name="semestre" id="semestres">
             <option value="n/a">N/A</option>
             <option value="1">1</option>
@@ -97,6 +97,8 @@
         }
         function limpiar() {
             document.getElementById("horarios").innerHTML = ""
+            document.getElementById("carreras").value = "n/a"
+            document.getElementById("semestres").value = "n/a"
         }
         function getSemesterKey(carrera, nroSemestre) {
             let carreraAcomodada = carrera;
@@ -132,7 +134,10 @@
                 }
                 agregar_src(src, carrera, semestre, especifico)
                 for (let i = 0; i < especifico.length; i++) {
-                    document.getElementById("horarios").innerHTML += `<p>${especifico[i].toUpperCase()}</p><br><img src=${src[i]}><hr>`
+                    if (carrera == "administracion_contaduria") {
+                        carrera="administracion y contaduria"
+                    }
+                    document.getElementById("horarios").innerHTML += `<p>${especifico[i].toUpperCase()} del ${nro_semestre} semestre en la carrera de ${carrera.toUpperCase()}</p><br><img src=${src[i]}><hr>`
                 }
             }
             src = []
