@@ -54,6 +54,7 @@
 
     <script>
         var src = []
+
         var economia_1 = [
             "m01", "m02", "t01"
         ]
@@ -90,6 +91,11 @@
         var administracion_9 = [
             "m01", "m02", "m03", "t01", "n01", "n03"
         ]
+        var semestres_totales = {
+            economia_1, economia_2, administracion_contaduria_1, administracion_contaduria_2, administracion_contaduria_3,
+            administracion_contaduria_4, administracion_contaduria_5, administracion_contaduria_6,
+            administracion_contaduria_7, administracion_contaduria_8, contaduria_9, administracion_9
+        }
         function prueba_2() {
             document.getElementById("horarios").innerHTML = "<table id='horarios'></table>"
         }
@@ -118,13 +124,13 @@
             if (carrera == "n/a" || nro_semestre == "n/a") {
                 alert("Escoge un semestre y/o carrera")
             } else {
-                var variable = eval(verificaciones(carrera, nro_semestre))
+                var especifico = semestres_totales[(verificaciones(carrera, nro_semestre))]
                 if ((carrera == "administracion" || carrera == "contaduria") && nro_semestre <= 5) {
                     carrera = "administracion_contaduria"
                 }
-                agregar_src(src, carrera, semestre, variable)
-                for (let i = 0; i < variable.length; i++) {
-                    document.getElementById("horarios").innerHTML += "<p>" + variable[i].toUpperCase() + "</p>" + "<br><img src=" + src[i] + "><hr>"
+                agregar_src(src, carrera, semestre, especifico)
+                for (let i = 0; i < especifico.length; i++) {
+                    document.getElementById("horarios").innerHTML += "<p>" + especifico[i].toUpperCase() + "</p>" + "<br><img src=" + src[i] + "><hr>"
                 }
             }
             src = []
