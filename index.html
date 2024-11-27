@@ -44,7 +44,16 @@
             <option value="9">9</option>
         </select>
         <br>
+        <label>Escoja su carrera para ver las electivas</label>
+        <select name="electiva" id="electiva">
+            <option value="n/a">N/A</option>
+            <option value="admin_cont">Administracion o Contaduria</option>
+            <option value="econ">Economia</option>
+        </select>
+        <br>
         <button id="boton" onclick="getHorario()">Ver horarios</button>
+        <br>
+        <button id="boton" onclick="electivas()">Ver electivas</button>
         <br>
         <button id="boton" onclick="limpiar()">Limpiar</button>
         <div class="resultados" id="horarios">
@@ -82,7 +91,7 @@
             "m01", "m02", "m03", "n01", "n02"
         ]
         var administracion_contaduria_7 = [
-            'm01', "m02", 'n01', 'n02'
+            'm01', "m02","t01", 'n01', 'n02'
         ]
         var administracion_contaduria_8 = [
             'm01', "m02", "m03", 'n01', 'n02', 'n03', 'n04'
@@ -102,6 +111,7 @@
             document.getElementById("horarios").innerHTML = ""
             document.getElementById("carreras").value = "n/a"
             document.getElementById("semestres").value = "n/a"
+            document.getElementById("electiva").value = "n/a"
         }
         function getSemesterKey(carrera, nroSemestre) {
             let carreraAcomodada = carrera;
@@ -136,12 +146,25 @@
                 agregar_src(src, carrera, semestre, especifico)
                 for (let i = 0; i < especifico.length; i++) {
                     if (carrera == "administracion_contaduria") {
-                        carrera = "administracion y contaduria"
+                        carrera = "administracion o contaduria"
                     }
                     document.getElementById("horarios").innerHTML += `<p>${especifico[i].toUpperCase()} del ${nro_semestre} semestre en la carrera de ${carrera.toUpperCase()}</p><br><img src=${src[i]}><hr>`
                 }
             }
             src = []
+        }
+        function electivas() {
+            var carrera = document.getElementById("electiva").value
+            if (carrera == "n/a") {
+                alert("Escoge una carrera")
+                return ;
+            }
+            if (carrera=="admin_cont") {
+                carreraupp = "administracion y contaduria"
+            } else {
+                carreraupp = "economia"
+            }
+            document.getElementById("horarios").innerHTML += `<p>Electivas de ${carreraupp.toUpperCase()}</p><br><img src="horarios/electivas/${carrera}.png"><hr>`
         }
     </script>
 </body>
