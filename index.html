@@ -55,9 +55,12 @@
         var src = []
 
         var economia_1 = [
-            "m01", "m02", "t01"
+            "m01", "m02", "t01", "t02"
         ]
         var economia_2 = [
+            "m01", "m02", "t01"
+        ]
+        var economia_3 = [
             "m01", "t01"
         ]
         var administracion_contaduria_1 = [
@@ -73,7 +76,7 @@
             "m01", "m02", "m03", "t01", "n01", "n02"
         ]
         var administracion_contaduria_5 = [
-            "m01", "m02", "m03", "n01", "n02", "n03"
+            "m01", "m02", "m03", "t02", "n01", "n02", "n03"
         ]
         var administracion_contaduria_6 = [
             "m01", "m02", "m03", "n01", "n02"
@@ -91,7 +94,7 @@
             "m01", "m02", "m03", "t01", "n01", "n03"
         ]
         var semestres_totales = {
-            economia_1, economia_2, administracion_contaduria_1, administracion_contaduria_2, administracion_contaduria_3,
+            economia_1, economia_2, economia_3, administracion_contaduria_1, administracion_contaduria_2, administracion_contaduria_3,
             administracion_contaduria_4, administracion_contaduria_5, administracion_contaduria_6,
             administracion_contaduria_7, administracion_contaduria_8, contaduria_9, administracion_9
         }
@@ -109,9 +112,7 @@
                 }
             } else if (carrera === "economia") {
                 if (nroSemestre >= 3) {
-                    nroSemestreAcomodado = 2;
-                } else {
-                    nroSemestreAcomodado = 1;
+                    nroSemestreAcomodado = 3;
                 }
             }
             return `${carreraAcomodada}_${nroSemestreAcomodado}`;
@@ -135,7 +136,7 @@
                 agregar_src(src, carrera, semestre, especifico)
                 for (let i = 0; i < especifico.length; i++) {
                     if (carrera == "administracion_contaduria") {
-                        carrera="administracion y contaduria"
+                        carrera = "administracion y contaduria"
                     }
                     document.getElementById("horarios").innerHTML += `<p>${especifico[i].toUpperCase()} del ${nro_semestre} semestre en la carrera de ${carrera.toUpperCase()}</p><br><img src=${src[i]}><hr>`
                 }
