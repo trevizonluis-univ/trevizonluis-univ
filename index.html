@@ -24,7 +24,7 @@
     <main class="main-content">
         <h4 style="text-align: center;">SE RECOMIENDA UTILIZAR EL BOTON DE "LIMPIAR" TRAS CADA BUSQUEDA<br> PARA VER MEJOR LOS RESULTADOS
             DADO QUE
-            PUEDEN <br>NEXISTIR CONFUSIONES Y MALENTENDIDOS</h4>
+            PUEDEN <br>EXISTIR CONFUSIONES Y MALENTENDIDOS</h4>
         <h6 style="text-align: center;">Hecho por Luis Trevizon</h6>
         <label>Escoja su carrera</label>
         <select name="carrera" id="carreras">
@@ -58,6 +58,8 @@
         <br>
         <button id="boton" onclick="electivas()">Ver electivas</button>
         <br>
+        <!-- <button id="boton" onclick="autodesarrollos()">Ver autodesarrollos</button>
+        <br> -->
         <button id="boton" onclick="limpiar()">Limpiar</button>
         <div class="resultados" id="horarios">
         </div>
@@ -168,6 +170,9 @@
                 carreraupp = "economia"
             }
             document.getElementById("horarios").innerHTML += `<p>Electivas de ${carreraupp.toUpperCase()}</p><br><img src="horarios/electivas/${carrera}.png"><hr>`
+        }
+        function autodesarrollos() {
+            document.getElementById("horarios").innerHTML += `<p>Autodesarrollos</p><br><img src="horarios/autodesarrollos.png"><hr>`
         }
     </script>
 </body>
