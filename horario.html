@@ -63,11 +63,6 @@
             color: #003153;
             /* Texto azul oscuro */
         }
-
-        tr:hover td {
-            background-color: rgb(220, 230, 250);
-            /* Color al pasar el ratón */
-        }
     </style>
     <title>HORARIOS</title>
 </head>
@@ -87,6 +82,7 @@
 <body>
     <main class="main-content">
         <h4 style="text-align: center;">FORMAR EL HORARIO DESEADO</h4>
+        <h4 style="text-align: center;">AGREGUEN LOS HORARIOS EN ORDEN</h4>
         <h6 style="text-align: center;">Hecho por Luis Trevizon</h6>
 
         <label>Materia</label>
@@ -119,10 +115,14 @@
             <option value="6">11:20-12:05</option>
         </select>
         <br>
+        <input type="checkbox" id="espacio" name="espacio" value="true">
+        <label for="espacio">Espacio libre</label>
+        <br>
         <button onclick="registrar()">Registrar</button>
         <button onclick="PrintTable();" value="Print">Imprimir</button>
+        <button onclick="limpiar_tabla()">Limpiar tabla</button>
         <div id="dvContents">
-            <table>
+            <table id="m">
                 <thead>
                     <tr>
                         <th>Bloque</th>
@@ -134,26 +134,25 @@
                         <th id="sabado">Sabado</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr id="1">
+                <tbody id="turno_m">
+                    <tr id="1m">
                         <td>7:25-8:10</td>
                     </tr>
-                    <tr id="2">
+                    <tr id="2m">
                         <td>8:10-8:55</td>
                     </tr>
-                    <tr id="3">
+                    <tr id="3m">
                         <td>9:00-9:45</td>
                     </tr>
-                    <tr id="4">
+                    <tr id="4m">
                         <td>9:45-10:35</td>
                     </tr>
-                    <tr id="5">
+                    <tr id="5m">
                         <td>10:35-11:20</td>
                     </tr>
-                    <tr id="6">
+                    <tr id="6m">
                         <td>11:25-12:05</td>
                     </tr>
-
                 </tbody>
                 <tfoot>
                 </tfoot>
@@ -185,21 +184,28 @@
                 console.log(hora_entrada)
                 console.log(hora_salida)
                 disnt_bloq = hora_salida - hora_entrada + 1
-                if (materias.length == 0 || salon_num.length == 0 || prof_nom.length == 0 || hora_entrada.length == 0 || hora_salida.length == 0 || hora_entrada > hora_salida) {
-                    alert("No hay datos.")
-                    return false
+                if ($("#espacio").is(":checked") && hora_entrada < hora_salida) {
+
+                    $("#" + hora_entrada+ turno).append(
+                        "<td rowspan=" + "'" + disnt_bloq + "'" + ">" + "  " + "</td>",
+                    )
                 } else {
-                    datosnum.push(new RecabarDatos(materias, prof_nom, salon_num, hora_entrada, hora_salida))
-                    console.log(datosnum)
+                    if (materias.length == 0 || salon_num.length == 0 || prof_nom.length == 0 || hora_entrada.length == 0 || hora_salida.length == 0 || hora_entrada > hora_salida) {
+                        alert("No hay datos.")
+                        return false
+                    } else {
+                        datosnum.push(new RecabarDatos(materias, prof_nom, salon_num, hora_entrada, hora_salida))
+                        console.log(datosnum)
+                    }
+                    $("#" + hora_entrada).append(
+                        "<td rowspan=" + "'" + disnt_bloq + "'" + ">" + datosnum[numero].nombre + "</td>",
+                    )
+                    // $("#promediototal").text(promediototal)
+                    // $("#promedionota1").text(promediototal1)
+                    // $("#promedionota2").text(promediototal2)
+                    // $("#promedionota3").text(promediototal3)
+                    numero = numero + 1
                 }
-                $("#" + hora_entrada).append(
-                    "<td rowspan=" + "'" + disnt_bloq + "'" + ">" + datosnum[numero].nombre + "</td>",
-                )
-                // $("#promediototal").text(promediototal)
-                // $("#promedionota1").text(promediototal1)
-                // $("#promedionota2").text(promediototal2)
-                // $("#promedionota3").text(promediototal3)
-                numero = numero + 1
             }
             function PrintTable() {
                 var printWindow = window.open('', '', 'height=200,width=400');
@@ -221,6 +227,32 @@
                 printWindow.document.write('</html>');
                 printWindow.document.close();
                 printWindow.print();
+            }
+
+            function limpiar_tabla(turno) {
+                if(turno=="turno_m") {
+                    $("#turno_m").html(
+                    "<tr id='1'>"+
+                    "<td>7:25-8:10</td>"+
+                    "</tr>"+
+                    "<tr id='2'>"+
+                    "<td>8:10-8:55</td>"+
+                    "</tr>"+
+                    "<tr id='3'>"+
+                    "<td>9:00-9:45</td>"+
+                    "</tr>"+
+                    "<tr id='4'>"+
+                    "<td>9:45-10:35</td>"+
+                    "</tr>"+
+                    '<tr id="5">'+
+                    "<td>10:35-11:20</td>"+
+                    ' </tr>'+
+                    '<tr id="6">'+
+                    '<td>11:25-12:05</td>'+
+                    '</tr>'
+                )
+                }
+                
             }
         </script>
     </main>
