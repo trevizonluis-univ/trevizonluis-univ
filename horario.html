@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sources/estilos.css">
+    <link rel="stylesheet" href="sources/minimal_table.css">
+    <script src="sources/jquery-3.6.1.js"></script>
+    <style id="table_style" type="text/css">
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            /* Color de fondo claro */
+        }
+
+        /* Estilos para la tabla */
+        table {
+            border-collapse: collapse;
+            border: 2px solid #007bff;
+            /* Borde azul */
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            /* Tamaño de fuente similar a otros elementos */
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        td,
+        th {
+            border: 1px solid rgb(190, 190, 190);
+            padding: 12px 25px;
+            /* Espaciado interno similar a otros elementos */
+        }
+
+        th {
+            background-color: #f9f9f9;
+            /* Fondo claro */
+            font-weight: bold;
+            color: #003153;
+            /* Texto azul oscuro */
+        }
+
+        td {
+            text-align: center;
+        }
+
+        tr:nth-child(even) td {
+            background-color: rgb(250, 250, 250);
+        }
+
+        tr:nth-child(odd) td {
+            background-color: rgb(245, 245, 245);
+        }
+
+        caption {
+            padding: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #003153;
+            /* Texto azul oscuro */
+        }
+
+        tr:hover td {
+            background-color: rgb(220, 230, 250);
+            /* Color al pasar el ratón */
+        }
+    </style>
+    <title>HORARIOS</title>
+</head>
+<header class="header">
+    <div class="logo-container">
+        <div class="left-logos">
+            <img src="logos/ucla.jpg" style="width: 100px;" alt="Logo Izquierdo" class="logo">
+            <!-- <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo"> -->
+        </div>
+        <h1 class="title">Horarios UCLA 2024-2</h1>
+        <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo">
+
+    </div>
+
+</header>
+
+<body>
+    <main class="main-content">
+        <h4 style="text-align: center;">FORMAR EL HORARIO DESEADO</h4>
+        <h6 style="text-align: center;">Hecho por Luis Trevizon</h6>
+
+        <label>Materia</label>
+        <input type="text" id="materia">
+        <br>
+        <label>Salon</label>
+        <input type="number" id="salon_num">
+        <br>
+        <label>Profesor</label>
+        <input type="text" id="prof_nom">
+        <label>Hora de Entrada</label>
+        <select id="hora_entrada">
+            <option value="">N/A</option>
+            <option value="1">7:25-8:10</option>
+            <option value="2">8:10-8:55</option>
+            <option value="3">9:00-9:45</option>
+            <option value="4">9:45-10:35</option>
+            <option value="5">10:35-11:20</option>
+            <option value="6">11:20-12:05</option>
+        </select>
+        <br>
+        <label>Hora de Salida</label>
+        <select id="hora_salida">
+            <option value="">N/A</option>
+            <option value="1">7:25-8:10</option>
+            <option value="2">8:10-8:55</option>
+            <option value="3">9:00-9:45</option>
+            <option value="4">9:45-10:35</option>
+            <option value="5">10:35-11:20</option>
+            <option value="6">11:20-12:05</option>
+        </select>
+        <br>
+        <button onclick="registrar()">Registrar</button>
+        <button onclick="PrintTable();" value="Print">Imprimir</button>
+        <div id="dvContents">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bloque</th>
+                        <th id="lunes">Lunes</th>
+                        <th id="martes">Martes</th>
+                        <th id="miercoles">Miercoles</th>
+                        <th id="jueves">Jueves</th>
+                        <th id="viernes">Viernes</th>
+                        <th id="sabado">Sabado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="1">
+                        <td>7:25-8:10</td>
+                    </tr>
+                    <tr id="2">
+                        <td>8:10-8:55</td>
+                    </tr>
+                    <tr id="3">
+                        <td>9:00-9:45</td>
+                    </tr>
+                    <tr id="4">
+                        <td>9:45-10:35</td>
+                    </tr>
+                    <tr id="5">
+                        <td>10:35-11:20</td>
+                    </tr>
+                    <tr id="6">
+                        <td>11:25-12:05</td>
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                </tfoot>
+        </div>
+        </table>
+        <script>
+            var datosnum = []
+            var numero = 0
+            function RecabarDatos(nombre, prof_nom, salon_num, hora_entrada, hora_salida) {
+                this.nombre = nombre + "  " + prof_nom + " Salon " + salon_num
+                this.hora_entrada = hora_entrada
+                this.hora_salida = hora_salida
+
+            }
+            function registrar() {
+                var materias = $("#materia").val()
+                $("#materia").val("")
+                var prof_nom = $("#prof_nom").val()
+                $("#prof_nom").val("")
+                var salon_num = $("#salon_num").val()
+                $("#salon_num").val("")
+                var hora_entrada = $("#hora_entrada").val()
+                $("#hora_entrada").val("")
+                var hora_salida = $("#hora_salida").val()
+                $("#hora_salida").val("")
+                console.log(materias)
+                console.log(salon_num)
+                console.log(prof_nom)
+                console.log(hora_entrada)
+                console.log(hora_salida)
+                disnt_bloq = hora_salida - hora_entrada + 1
+                if (materias.length == 0 || salon_num.length == 0 || prof_nom.length == 0 || hora_entrada.length == 0 || hora_salida.length == 0 || hora_entrada > hora_salida) {
+                    alert("No hay datos.")
+                    return false
+                } else {
+                    datosnum.push(new RecabarDatos(materias, prof_nom, salon_num, hora_entrada, hora_salida))
+                    console.log(datosnum)
+                }
+                $("#" + hora_entrada).append(
+                    "<td rowspan=" + "'" + disnt_bloq + "'" + ">" + datosnum[numero].nombre + "</td>",
+                )
+                // $("#promediototal").text(promediototal)
+                // $("#promedionota1").text(promediototal1)
+                // $("#promedionota2").text(promediototal2)
+                // $("#promedionota3").text(promediototal3)
+                numero = numero + 1
+            }
+            function PrintTable() {
+                var printWindow = window.open('', '', 'height=200,width=400');
+                printWindow.document.write('<html><head><title>HORARIO</title>');
+
+                //Print the Table CSS.
+                var table_style = document.getElementById("table_style").innerHTML;
+                printWindow.document.write('<style type = "text/css">');
+                printWindow.document.write(table_style);
+                printWindow.document.write('</style>');
+                printWindow.document.write('</head>');
+
+                //Print the DIV contents i.e. the HTML Table.
+                printWindow.document.write('<body>');
+                var divContents = document.getElementById("dvContents").innerHTML;
+                printWindow.document.write(divContents);
+                printWindow.document.write('</body>');
+
+                printWindow.document.write('</html>');
+                printWindow.document.close();
+                printWindow.print();
+            }
+        </script>
+    </main>
+</body>
+
+</html>

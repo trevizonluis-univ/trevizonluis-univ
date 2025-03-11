@@ -11,10 +11,10 @@
     <div class="logo-container">
         <div class="left-logos">
             <img src="logos/ucla.jpg" style="width: 100px;" alt="Logo Izquierdo" class="logo">
-            <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo">
+            <!-- <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo"> -->
         </div>
         <h1 class="title">Horarios UCLA 2024-2</h1>
-        <img class="logo right-logo" width="158px" src="logos\miles blanco.png" alt="Logo Derecho">
+        <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo">
 
     </div>
 
@@ -22,7 +22,8 @@
 
 <body>
     <main class="main-content">
-        <h4 style="text-align: center;">SE RECOMIENDA UTILIZAR EL BOTON DE "LIMPIAR" TRAS CADA BUSQUEDA<br> PARA VER MEJOR LOS RESULTADOS
+        <h4 style="text-align: center;">SE RECOMIENDA UTILIZAR EL BOTON DE "LIMPIAR" TRAS CADA BUSQUEDA<br> PARA VER
+            MEJOR LOS RESULTADOS
             DADO QUE
             PUEDEN <br>EXISTIR CONFUSIONES Y MALENTENDIDOS</h4>
         <h6 style="text-align: center;">Hecho por Luis Trevizon</h6>
@@ -61,11 +62,17 @@
         <button id="boton" onclick="autodesarrollos()">Ver autodesarrollos</button>
         <br>
         <button id="boton" onclick="limpiar()">Limpiar</button>
+        <button><a href="horario.html">Crear horario</a></button>
         <div class="resultados" id="horarios">
         </div>
     </main>
 
     <script>
+        document.querySelectorAll('.printbutton').forEach(function (element) {
+            element.addEventListener('click', function () {
+                print();
+            });
+        });
         var src = []
 
         var economia_1 = [

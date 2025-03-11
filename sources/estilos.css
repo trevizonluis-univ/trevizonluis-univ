@@ -230,3 +230,85 @@ caption {
     font-weight: bold;
     /* Negrita para el caption */
 }
+
+/* Estilos para inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="time"] {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 150px;
+    border: 2px solid #007bff;
+    /* Borde azul */
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus {
+    border: 1px solid #0056b3;
+    /* Borde azul más oscuro al enfocar */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para textarea */
+textarea {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 150px;
+    height: 50px;
+    border: 1px solid #007bff;
+    /* Borde azul */
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+textarea:focus {
+    border: 1px solid #0056b3;
+    /* Borde azul más oscuro al enfocar */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para checkbox y radio */
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Estilos para checkbox y radio labels */
+input[type="checkbox"]+label,
+input[type="radio"]+label {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    textarea {
+        width: 100%;
+        padding: 5px;
+    }
+}
+
+a {
+    color: white;
+    /* Texto blanco */
+    text-decoration: none;
+    /* Elimina el subrayado */
+}
