@@ -197,7 +197,7 @@
                         datosnum.push(new RecabarDatos(materias, prof_nom, salon_num, hora_entrada, hora_salida))
                         console.log(datosnum)
                     }
-                    $("#" + hora_entrada).append(
+                    $("#" + hora_entrada+"m").append(
                         "<td rowspan=" + "'" + disnt_bloq + "'" + ">" + datosnum[numero].nombre + "</td>",
                     )
                     // $("#promediototal").text(promediototal)
