@@ -288,7 +288,15 @@
         }
     }
     function RecabarDatos(nombre, prof_nom, salon_num, hora_entrada, hora_salida) {
-        this.nombre = nombre + "  " + prof_nom + " Salon " + salon_num
+        this.prof_nombr = prof_nom
+        if (prof_nom.length == 0) {
+            this.prof_nombr = "N/A"
+        }
+        this.salon_numer = salon_num
+        if (salon_num.length == 0) {
+            this.salon_numer = "N/A"
+        }
+        this.nombre = nombre + "<br>" + "Prof " + this.prof_nombr + "<br>" + " Salon " + this.salon_numer
         this.hora_entrada = hora_entrada
         this.hora_salida = hora_salida
 
@@ -314,7 +322,7 @@
                     "<td rowspan=" + "'" + disnt_bloq + "'" + ">" + "  " + "</td>",
                 )
             } else {
-                if (materias.length == 0 || salon_num.length == 0 || prof_nom.length == 0 || hora_entrada.length == 0 || hora_salida.length == 0 || hora_entrada > hora_salida) {
+                if (materias.length == 0 || hora_entrada.length == 0 || hora_salida.length == 0 || hora_entrada > hora_salida) {
                     alert("No hay datos.")
                     return false
                 } else {
