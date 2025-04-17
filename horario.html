@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="sources/estilos.css">
     <script src="sources/jquery-3.6.1.js"></script>
+    <script src="sources/script.js"></script>
     <style id="table_style" type="text/css">
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -111,6 +113,17 @@
         <br>
         <label>Profesor</label>
         <input type="text" id="prof_nom">
+        <br>
+        <label for="">Selecciona el dia</label>
+        <select id="dia">
+            <option value="">N/A</option>
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miercoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sabado</option>
+        </select>
         <br>
         <label for="">Selecciona el turno</label>
         <select id="turno" onchange="cambia_turnos()">
@@ -248,210 +261,5 @@
         </div>
     </main>
 </body>
-<script>
-    var datosnum = []
-    var numero = 0
-    var value_m = ["", "1", "2", "3", "4", "5", "6"]
-    var value_t = ["", "1", "2", "3", "4", "5"]
-    var value_n = ["", "1", "2", "3", "4", "5"]
-    var texto_m = ["N/A", "7:25-8:10", "8:10-8:55", "9:00-9:45", "9:45-10:35", "10:35-11:20", "11:25-12:05"]
-    var texto_t = ["N/A", "12:40-1:20", "1:20-2:00", "2:00-2:40", "2:45-3:25", "3:25-4:05"]
-    var texto_n = ["N/A", "5:00-5:40", "5:40-6:20", "6:20-7:00", "7:05-7:45", "7:45-8:25"]
-    function cambia_turnos() {
-        hora_entrada = document.getElementById("hora_entrada")
-        hora_salida = document.getElementById("hora_salida")
-        console.log(hora_entrada)
-        var turno = document.getElementById("turno").value
-        console.log(turno)
-        if (turno != "") {
-            value = eval("value_" + turno)
-            texto = eval("texto_" + turno)
-            num_turno = value.length
-            console.log(num_turno)
-            hora_entrada.length = num_turno
-            hora_salida.length = num_turno
-            i = 0
-            while (i < num_turno) {
-                hora_entrada.options[i].value = value[i]
-                hora_entrada.options[i].text = texto[i]
-                hora_salida.options[i].value = value[i]
-                hora_salida.options[i].text = texto[i]
-                i++
-            }
-        } else {
-            hora_entrada.length = 1
-            hora_entrada.options[0].value = ""
-            hora_entrada.options[0].text = "N/A"
-            hora_salida.length = 1
-            hora_salida.options[0].value = ""
-            hora_salida.options[0].text = "N/A"
-        }
-    }
-    function RecabarDatos(nombre, prof_nom, salon_num, hora_entrada, hora_salida) {
-        this.prof_nombr = prof_nom
-        if (prof_nom.length == 0) {
-            this.prof_nombr = "N/A"
-        }
-        this.salon_numer = salon_num
-        if (salon_num.length == 0) {
-            this.salon_numer = "N/A"
-        }
-        this.nombre = nombre + "<br>" + "Prof " + this.prof_nombr + "<br>" + " Salon " + this.salon_numer
-        this.hora_entrada = hora_entrada
-        this.hora_salida = hora_salida
-
-    }
-    function registrar() {
-        var materias = $("#materia").val()
-        var prof_nom = $("#prof_nom").val()
-        var salon_num = $("#salon_num").val()
-        var hora_entrada = $("#hora_entrada").val()
-        hora_entrada = parseInt(hora_entrada)
-        var hora_salida = $("#hora_salida").val()
-        hora_salida = parseInt(hora_salida)
-        var turno = $("#turno").val()
-        console.log(salon_num)
-        console.log(prof_nom)
-        console.log(hora_entrada)
-        console.log(hora_salida)
-        console.log(turno)
-        disnt_bloq = hora_salida - hora_entrada + 1
-        if (turno != "") {
-            if ($("#espacio").is(":checked") && hora_entrada <= hora_salida) {
-                $("#" + hora_entrada + turno).append(
-                    "<td rowspan=" + "'" + disnt_bloq + "'" + ">" + "  " + "</td>",
-                )
-            } else {
-                if (materias.length == 0 || hora_entrada.length == 0 || hora_salida.length == 0 || hora_entrada > hora_salida) {
-                    alert("No hay datos.")
-                    return false
-                } else {
-                    datosnum.push(new RecabarDatos(materias, prof_nom, salon_num, hora_entrada, hora_salida))
-                    console.log(datosnum)
-                }
-                $("#" + hora_entrada + turno).append(
-                    "<td rowspan=" + "'" + disnt_bloq + "'" + ">" + datosnum[numero].nombre + "</td>",
-                )
-                numero = numero + 1
-                $("#materia").val("")
-                $("#prof_nom").val("")
-                $("#salon_num").val("")
-                $("#hora_entrada").val("")
-                $("#hora_salida").val("")
-            }
-
-        } else {
-            alert("No hay datos.")
-            return false
-        }
-        $("#espacio").prop("checked", false)
-
-    }
-    function PrintTable() {
-        var printWindow = window.open('', '', 'height=200,width=400');
-        printWindow.document.write('<html><head><title>HORARIO</title>');
-
-        //Print the Table CSS.
-        var table_style = document.getElementById("table_style").innerHTML;
-        printWindow.document.write('<style type = "text/css">');
-        printWindow.document.write(table_style);
-        printWindow.document.write('</style>');
-        printWindow.document.write('</head>');
-
-        //Print the DIV contents i.e. the HTML Table.
-        printWindow.document.write('<body>');
-        var divContents = document.getElementById("dvContents").innerHTML;
-        printWindow.document.write(divContents);
-        printWindow.document.write('</body>');
-
-        printWindow.document.write('</html>');
-        printWindow.document.close();
-        printWindow.print();
-    }
-
-    function limpiar_tabla() {
-        turno = prompt("Escoja el turno para limpiar (m=mañana, t=tarde, n=noche)")
-        if (turno != "") {
-            if (turno == "m") {
-                $("#turno_m").html(
-                    "<tr id='1m'>" +
-                    "<td>7:25-8:10</td>" +
-                    "</tr>" +
-                    "<tr id='2m'>" +
-                    "<td>8:10-8:55</td>" +
-                    "</tr>" +
-                    "<tr id='3m'>" +
-                    "<td>9:00-9:45</td>" +
-                    "</tr>" +
-                    "<tr id='4m'>" +
-                    "<td>9:45-10:35</td>" +
-                    "</tr>" +
-                    '<tr id="5m">' +
-                    "<td>10:35-11:20</td>" +
-                    ' </tr>' +
-                    '<tr id="6m">' +
-                    '<td>11:25-12:05</td>' +
-                    '</tr>'
-                )
-            } else if (turno == "t") {
-                $("#turno_t").html(
-                    "<tr id='1t'>" +
-                    "<td>12:40-1:20</td>" +
-                    "</tr>" +
-                    "<tr id='2t'>" +
-                    "<td>1:20-2:00</td>" +
-                    "</tr>" +
-                    "<tr id='3t'>" +
-                    "<td>2:00-2:40</td>" +
-                    "</tr>" +
-                    "<tr id='4t'>" +
-                    "<td>2:45-3:25</td>" +
-                    "</tr>" +
-                    '<tr id="5t">' +
-                    "<td>3:25-4:05</td>" +
-                    ' </tr>'
-                )
-            } else if (turno == "n") {
-                $("#turno_n").html(
-                    "<tr id='1n'>" +
-                    "<td>5:00-5:40</td>" +
-                    "</tr>" +
-                    "<tr id='2n'>" +
-                    "<td>5:40-6:20</td>" +
-                    "</tr>" +
-                    "<tr id='3n'>" +
-                    "<td>6:20-7:00</td>" +
-                    "</tr>" +
-                    "<tr id='4n'>" +
-                    "<td>7:05-7:45</td>" +
-                    "</tr>" +
-                    '<tr id="5n">' +
-                    "<td>7:45-8:25</td>" +
-                    ' </tr>'
-                )
-            }
-        } else {
-            alert("No hay tabla seleccionada.")
-            return false
-        }
-    }
-    function mostrar_turnos() {
-        if ($("#check_m").is(":checked")) {
-            $("#hidden_m").show()
-        } else {
-            $("#hidden_m").hide()
-        }
-        if ($("#check_t").is(":checked")) {
-            $("#hidden_t").show()
-        } else {
-            $("#hidden_t").hide()
-        }
-        if ($("#check_n").is(":checked")) {
-            $("#hidden_n").show()
-        } else {
-            $("#hidden_n").hide()
-        }
-    }
-</script>
 
 </html>

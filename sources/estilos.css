@@ -5,6 +5,22 @@ body {
     /* Color de fondo claro */
 }
 
+.white-space-pre {
+    white-space: pre-line;
+    /* o pre-wrap */
+}
+
+table td.empty-cell {
+    border: none;
+    background-color: transparent;
+}
+
+table td.filled-cell {
+    border: 1px solid #999;
+    background-color: #eef;
+    text-align: center;
+}
+
 .header {
     background-color: #003153;
     /* Azul oscuro */
