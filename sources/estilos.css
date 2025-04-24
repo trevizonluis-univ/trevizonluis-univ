@@ -13,6 +13,7 @@ body {
 table td.empty-cell {
     border: none;
     background-color: transparent;
+    display: none;
 }
 
 table td.filled-cell {
