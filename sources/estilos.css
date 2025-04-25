@@ -5,6 +5,68 @@ body {
     /* Color de fondo claro */
 }
 
+
+/* Estilos para la tabla */
+table {
+    border-collapse: collapse;
+    border: 2px solid #007bff;
+    /* Borde azul */
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    /* Tamaño de fuente similar a otros elementos */
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 400px;
+    /* Ancho de la tabla */
+    height: 200px;
+    /* Alto de la tabla */
+}
+
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 5px;
+    /* Ajustado para evitar expansión */
+    overflow: hidden;
+    /* Para que el contenido no sobrepase el tamaño de la celda */
+}
+
+th {
+    background-color: #f9f9f9;
+    /* Fondo claro */
+    font-weight: bold;
+    color: #003153;
+    /* Texto azul oscuro */
+}
+
+td {
+    text-align: center;
+}
+
+caption {
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #003153;
+    /* Texto azul oscuro */
+}
+
+/* Para que las tablas se muestren una debajo de otra */
+#hidden_m,
+#hidden_t,
+#hidden_n {
+    margin-bottom: 20px;
+    /* Espacio entre las tablas */
+}
+
+#dvContents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .white-space-pre {
     white-space: pre-line;
     /* o pre-wrap */

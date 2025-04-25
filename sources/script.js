@@ -170,13 +170,8 @@ function mostrar_turnos() {
 function PrintTable() {
     var printWindow = window.open('', '', 'height=200,width=400');
     printWindow.document.write('<html><head><title>HORARIO</title>');
-
-    var table_style = document.getElementById("table_style").innerHTML;
-    printWindow.document.write('<style type = "text/css">');
-    printWindow.document.write(table_style);
-    printWindow.document.write('</style>');
+    printWindow.document.write('<link rel="stylesheet" href="sources/estilos.css">');
     printWindow.document.write('</head>');
-
     printWindow.document.write('<body>');
     var divContents = document.getElementById("dvContents").innerHTML;
     printWindow.document.write(divContents);
