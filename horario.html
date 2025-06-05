@@ -157,7 +157,7 @@
                     </div>
                 </div>
 
-                <div id="hidden_t" hidden>
+                <div id="hidden_t">
                     <div class="turno-section">
                         <div class="turno-header">Turno de Tarde</div>
                         <table id="t">
@@ -193,7 +193,7 @@
                     </div>
                 </div>
 
-                <div id="hidden_n" hidden>
+                <div id="hidden_n">
                     <div class="turno-section">
                         <div class="turno-header">Turno de Noche</div>
                         <table id="n">
@@ -396,8 +396,7 @@
                 profesor: profesor || 'N/A',
                 salon: salon || 'N/A',
                 entrada,
-                salida,
-                esEspacio
+                salida
             };
 
             // Guardar el evento en todos los bloques que ocupa
@@ -462,7 +461,7 @@
                         }
 
                         td.innerHTML = `
-                            <div class="event-info">
+                            <div>
                                 <div class="event-title">${evento.materia}</div>
                                 <div>Prof: ${evento.profesor}</div>
                                 <div>Salón: ${evento.salon}</div>
@@ -496,17 +495,10 @@
             document.getElementById('hora_salida').value = '';
             document.getElementById('dia').value = '';
             document.getElementById('turno').value = '';
-            document.getElementById('espacio').checked = false;
         }
 
         // Función para imprimir el horario
         function PrintTable() {
-            // Primero mostrar todos los turnos para imprimir
-            document.querySelectorAll('#check_m, #check_t, #check_n').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            mostrar_turnos();
-
             setTimeout(() => {
                 const printWindow = window.open('', '_blank');
                 printWindow.document.write(`
@@ -530,7 +522,7 @@
                     <body>
                         <div class="print-header">
                             <img src="logos/ucla.jpg" class="print-logo">
-                            <div class="print-title">Horario Personalizado - UCLA 2024-2</div>
+                            <div class="print-title">Horario Personalizado - UCLA 2025-1</div>
                             <img src="logos/dcee.jpg" class="print-logo">
                         </div>
                         ${document.getElementById('dvContents').innerHTML}
