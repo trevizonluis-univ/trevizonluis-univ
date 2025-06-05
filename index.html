@@ -1,128 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="sources/estilos.css">
-    <title>HORARIOS</title>
+    <title>Horarios UCLA 2024-2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="sources/estilos_index.css">
 </head>
-<header class="header">
-    <div class="logo-container">
-        <div class="left-logos">
-            <img src="logos/ucla.jpg" style="width: 100px;" alt="Logo Izquierdo" class="logo">
-            <!-- <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo"> -->
-        </div>
-        <h1 class="title">Horarios UCLA 2024-2</h1>
-        <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo">
-
-    </div>
-
-</header>
 
 <body>
-    <main class="main-content">
-        <h4 style="text-align: center;">SE RECOMIENDA UTILIZAR EL BOTON DE "LIMPIAR" TRAS CADA BUSQUEDA<br> PARA VER
-            MEJOR LOS RESULTADOS
-            DADO QUE
-            PUEDEN <br>EXISTIR CONFUSIONES Y MALENTENDIDOS</h4>
-        <h6 style="text-align: center;">Hecho por Luis Trevizon</h6>
-        <label>Escoja su carrera</label>
-        <select name="carrera" id="carreras">
-            <option value="n/a">N/A</option>
-            <option value="economia">Economia</option>
-            <option value="administracion">Administracion</option>
-            <option value="contaduria">Contaduria</option>
-        </select>
-        <label>Escoja su semestre</label>
-        <select name="semestre" id="semestres">
-            <option value="n/a">N/A</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-        </select>
-        <br>
-        <label>Escoja su carrera para ver las electivas</label>
-        <select name="electiva" id="electiva">
-            <option value="n/a">N/A</option>
-            <option value="admin_cont">Administracion o Contaduria</option>
-            <option value="econ">Economia</option>
-        </select>
-        <br>
-        <button id="boton" onclick="getHorario()">Ver horarios</button>
-        <br>
-        <button id="boton" onclick="electivas()">Ver electivas</button>
-        <br>
-        <button id="boton" onclick="autodesarrollos()">Ver autodesarrollos</button>
-        <br>
-        <button id="boton" onclick="limpiar()">Limpiar</button>
-        <!-- <button><a href="horario.html">Crear horario</a></button> -->
-        <div class="resultados" id="horarios">
-        </div>
-    </main>
+    <div class="container">
+        <header class="header">
+            <div class="header-bg"></div>
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="left-logos">
+                        <img src="logos/ucla.jpg" alt="Logo UCLA" class="logo">
+                    </div>
+                    <h1 class="title">Horarios UCLA 2024-2</h1>
+                    <img src="logos/dcee.jpg" alt="Logo DCCE" class="logo">
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="info-box">
+                SE RECOMIENDA UTILIZAR EL BOTÓN DE "LIMPIAR" TRAS CADA BÚSQUEDA<br>
+                PARA VER MEJOR LOS RESULTADOS DADO QUE PUEDEN<br>
+                EXISTIR CONFUSIONES Y MALENTENDIDOS
+            </div>
+
+            <div class="controls-section">
+                <div class="form-group">
+                    <label for="carreras"><i class="fas fa-graduation-cap"></i> Escoja su carrera</label>
+                    <select class="form-control" name="carrera" id="carreras">
+                        <option value="n/a">Seleccione una carrera</option>
+                        <option value="economia">Economia</option>
+                        <option value="administracion">Administracion</option>
+                        <option value="contaduria">Contaduria</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="semestres"><i class="fas fa-book"></i> Escoja su semestre</label>
+                    <select class="form-control" name="semestre" id="semestres">
+                        <option value="n/a">Seleccione un semestre</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="electiva"><i class="fas fa-star"></i> Escoja su carrera para ver las electivas</label>
+                    <select class="form-control" name="electiva" id="electiva">
+                        <option value="n/a">Seleccione para ver electivas</option>
+                        <option value="admin_cont">Administracion o Contaduria</option>
+                        <option value="econ">Economia</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="getHorario()">
+                        <i class="fas fa-calendar-alt"></i> Ver horarios
+                    </button>
+
+                    <button class="btn btn-success" onclick="electivas()">
+                        <i class="fas fa-star"></i> Ver electivas
+                    </button>
+
+                    <button class="btn btn-warning" onclick="autodesarrollos()">
+                        <i class="fas fa-user-graduate"></i> Ver autodesarrollos
+                    </button>
+
+                    <button class="btn btn-primary" onclick="irHorario()">
+                        <i class="fas fa-calendar-alt"></i> Generar Horarios
+                    </button>
+
+                    <button class="btn btn-danger" onclick="limpiar()">
+                        <i class="fas fa-broom"></i> Limpiar
+                    </button>
+                </div>
+            </div>
+
+            <div class="resultados" id="horarios">
+                <div class="empty-result">
+                    <i class="fas fa-calendar-day" style="font-size: 3rem; color: #ddd; margin-bottom: 15px;"></i>
+                    <p>Utilice los controles superiores para buscar horarios</p>
+                    <p class="creator-note">Los resultados aparecerán aquí</p>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <script>
-        var src = []
+        // Datos de los horarios
+        const semestres_totales = {
+            economia_1: ["m01", "m02", "t01", "t02"],
+            economia_2: ["m01", "m02", "t01"],
+            economia_3: ["m01", "t01"],
+            administracion_contaduria_1: ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "t01", "t02", "t03", "n01", "n02"],
+            administracion_contaduria_2: ["m01", "m02", "m03", "m04", "t01", "t02", "t03", "n01", "n02", "n03"],
+            administracion_contaduria_3: ["m01", "m02", "m03", "t01", "t02", "n01", "n02"],
+            administracion_contaduria_4: ["m01", "m02", "m03", "t01", "n01", "n02"],
+            administracion_contaduria_5: ["m01", "m02", "m03", "t02", "n01", "n02", "n03"],
+            administracion_contaduria_6: ["m01", "m02", "m03", "n01", "n02"],
+            administracion_contaduria_7: ['m01', "m02", "t01", 'n01', 'n02'],
+            administracion_contaduria_8: ['m01', "m02", "m03", 'n01', 'n02', 'n03', 'n04'],
+            contaduria_9: ["m01", "m02", "m03", "n01", "n02", "n03"],
+            administracion_9: ["m01", "m02", "m03", "t01", "n01", "n03"]
+        };
 
-        var economia_1 = [
-            "m01", "m02", "t01", "t02"
-        ]
-        var economia_2 = [
-            "m01", "m02", "t01"
-        ]
-        var economia_3 = [
-            "m01", "t01"
-        ]
-        var administracion_contaduria_1 = [
-            "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "t01", "t02", "t03", "n01", "n02"
-        ]
-        var administracion_contaduria_2 = [
-            "m01", "m02", "m03", "m04", "t01", "t02", "t03", "n01", "n02", "n03"
-        ]
-        var administracion_contaduria_3 = [
-            "m01", "m02", "m03", "t01", "t02", "n01", "n02"
-        ]
-        var administracion_contaduria_4 = [
-            "m01", "m02", "m03", "t01", "n01", "n02"
-        ]
-        var administracion_contaduria_5 = [
-            "m01", "m02", "m03", "t02", "n01", "n02", "n03"
-        ]
-        var administracion_contaduria_6 = [
-            "m01", "m02", "m03", "n01", "n02"
-        ]
-        var administracion_contaduria_7 = [
-            'm01', "m02", "t01", 'n01', 'n02'
-        ]
-        var administracion_contaduria_8 = [
-            'm01', "m02", "m03", 'n01', 'n02', 'n03', 'n04'
-        ]
-        var contaduria_9 = [
-            "m01", "m02", "m03", "n01", "n02", "n03"
-        ]
-        var administracion_9 = [
-            "m01", "m02", "m03", "t01", "n01", "n03"
-        ]
-        var semestres_totales = {
-            economia_1, economia_2, economia_3, administracion_contaduria_1, administracion_contaduria_2, administracion_contaduria_3,
-            administracion_contaduria_4, administracion_contaduria_5, administracion_contaduria_6,
-            administracion_contaduria_7, administracion_contaduria_8, contaduria_9, administracion_9
-        }
+        // Función para limpiar los resultados y formularios
         function limpiar() {
-            document.getElementById("horarios").innerHTML = ""
-            document.getElementById("carreras").value = "n/a"
-            document.getElementById("semestres").value = "n/a"
-            document.getElementById("electiva").value = "n/a"
+            document.getElementById("horarios").innerHTML = `
+                <div class="empty-result">
+                    <i class="fas fa-calendar-check" style="font-size: 3rem; color: var(--success); margin-bottom: 15px;"></i>
+                    <p>Se han limpiado los resultados</p>
+                    <p class="creator-note">Utilice los controles para realizar una nueva búsqueda</p>
+                </div>
+            `;
+            document.getElementById("carreras").value = "n/a";
+            document.getElementById("semestres").value = "n/a";
+            document.getElementById("electiva").value = "n/a";
         }
+
+        // Función para obtener la clave del semestre
         function getSemesterKey(carrera, nroSemestre) {
             let carreraAcomodada = carrera;
             let nroSemestreAcomodado = nroSemestre;
+
             if (carrera === "administracion" || carrera === "contaduria") {
                 if (nroSemestre < 9) {
                     carreraAcomodada = "administracion_contaduria";
@@ -132,49 +146,108 @@
                     nroSemestreAcomodado = 3;
                 }
             }
+
             return `${carreraAcomodada}_${nroSemestreAcomodado}`;
         }
+
+        // Función para agregar rutas de imágenes
         function agregar_src(arr, carrera, semestre, variable) {
             for (let i = 0; i < variable.length; i++) {
-                arr.push("horarios/" + carrera + "/" + semestre + "/" + variable[i] + ".png")
+                arr.push("horarios/" + carrera + "/" + semestre + "/" + variable[i] + ".png");
             }
         }
+
+        // Función para obtener horarios
         function getHorario() {
-            var carrera = document.getElementById("carreras").value
-            var nro_semestre = document.getElementById("semestres").value
-            var semestre = nro_semestre + "_semestre"
-            if (carrera == "n/a" || nro_semestre == "n/a") {
-                alert("Escoge un semestre y/o carrera")
-            } else {
-                var especifico = semestres_totales[(getSemesterKey(carrera, nro_semestre))]
-                if ((carrera == "administracion" || carrera == "contaduria") && nro_semestre <= 5) {
-                    carrera = "administracion_contaduria"
-                }
-                agregar_src(src, carrera, semestre, especifico)
-                for (let i = 0; i < especifico.length; i++) {
-                    if (carrera == "administracion_contaduria") {
-                        carrera = "administracion o contaduria"
-                    }
-                    document.getElementById("horarios").innerHTML += `<p>${especifico[i].toUpperCase()} del ${nro_semestre} semestre en la carrera de ${carrera.toUpperCase()}</p><br><img src=${src[i]}><hr>`
-                }
-            }
-            src = []
-        }
-        function electivas() {
-            var carrera = document.getElementById("electiva").value
-            if (carrera == "n/a") {
-                alert("Escoge una carrera")
+            const carrera = document.getElementById("carreras").value;
+            const nro_semestre = document.getElementById("semestres").value;
+            const semestre = nro_semestre + "_semestre";
+            let src = [];
+
+            if (carrera === "n/a" || nro_semestre === "n/a") {
+                alert("Por favor, seleccione una carrera y un semestre");
                 return;
             }
-            if (carrera == "admin_cont") {
-                carreraupp = "administracion y contaduria"
-            } else {
-                carreraupp = "economia"
+
+            const key = getSemesterKey(carrera, nro_semestre);
+            const especifico = semestres_totales[key];
+
+            if (!especifico) {
+                alert("No se encontraron horarios para esta combinación");
+                return;
             }
-            document.getElementById("horarios").innerHTML += `<p>Electivas de ${carreraupp.toUpperCase()}</p><br><img src="horarios/electivas/${carrera}.png"><hr>`
+
+            let carreraNombre = carrera;
+            if ((carrera === "administracion" || carrera === "contaduria") && nro_semestre <= 5) {
+                carreraNombre = "administracion_contaduria";
+            }
+
+            agregar_src(src, carreraNombre, semestre, especifico);
+
+            let htmlContent = `<h2 class="result-title">Horarios del ${nro_semestre}° semestre - ${carrera.toUpperCase()}</h2>`;
+
+            for (let i = 0; i < especifico.length; i++) {
+                let carreraTexto = carrera;
+                if (carreraNombre === "administracion_contaduria") {
+                    carreraTexto = "administración o contaduría";
+                }
+
+                htmlContent += `
+                    <div class="result-item">
+                        <p>${especifico[i].toUpperCase()} del ${nro_semestre}° semestre en la carrera de ${carreraTexto.toUpperCase()}</p>
+                        <img src="${src[i]}" alt="Horario ${especifico[i]}">
+                    </div>
+                    <hr class="hr-divider">
+                `;
+            }
+
+            document.getElementById("horarios").innerHTML = htmlContent;
         }
+
+        //Funcion para ir a horario.html
+
+        function irHorario() {
+            window.location.href = "horario.html";
+        }
+
+        // Función para mostrar electivas
+        function electivas() {
+            const carrera = document.getElementById("electiva").value;
+
+            if (carrera === "n/a") {
+                alert("Por favor, seleccione una carrera para ver las electivas");
+                return;
+            }
+
+            let carreraTexto = "";
+            if (carrera === "admin_cont") {
+                carreraTexto = "administración y contaduría";
+            } else {
+                carreraTexto = "economía";
+            }
+
+            const htmlContent = `
+                <h2 class="result-title">Electivas de ${carreraTexto.toUpperCase()}</h2>
+                <div class="result-item">
+                    <p>Electivas para la carrera de ${carreraTexto.toUpperCase()}</p>
+                    <img src="horarios/electivas/${carrera}.png" alt="Electivas ${carreraTexto}">
+                </div>
+            `;
+
+            document.getElementById("horarios").innerHTML = htmlContent;
+        }
+
+        // Función para mostrar autodesarrollos
         function autodesarrollos() {
-            document.getElementById("horarios").innerHTML += `<p>Autodesarrollos</p><br><img src="horarios/autodesarrollo/autodesarrollos.png"><hr>`
+            const htmlContent = `
+                <h2 class="result-title">Autodesarrollos</h2>
+                <div class="result-item">
+                    <p>Horarios de autodesarrollos</p>
+                    <img src="horarios/autodesarrollo/autodesarrollos.png" alt="Autodesarrollos">
+                </div>
+            `;
+
+            document.getElementById("horarios").innerHTML = htmlContent;
         }
     </script>
 </body>

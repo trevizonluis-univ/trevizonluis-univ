@@ -1,195 +1,565 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="sources/estilos.css">
-    <script src="sources/jquery-3.6.1.js"></script>
-    <script src="sources/script.js"></script>
-    <title>HORARIOS</title>
+    <title>Crear Horario - UCLA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="sources/estilos_horario.css">
 </head>
-<header class="header">
-    <div class="logo-container">
-        <div class="left-logos">
-            <img src="logos/ucla.jpg" style="width: 100px;" alt="Logo Izquierdo" class="logo">
-            <!-- <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo"> -->
-        </div>
-        <h1 class="title">Horarios UCLA 2024-2</h1>
-        <img src="logos/dcee.jpg" style="width: 100px;" alt="Logo Izquierdo 2" class="logo">
-
-    </div>
-
-</header>
 
 <body>
-    <main class="main-content">
-        <h4 style="text-align: center;">FORMAR EL HORARIO DESEADO</h4>
-        <h4 style="text-align: center;">AGREGUEN LOS HORARIOS EN ORDEN</h4>
-        <h6 style="text-align: center;">Hecho por Luis Trevizon</h6>
+    <div class="container">
+        <header class="header">
+            <div class="header-bg"></div>
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="left-logos">
+                        <img src="logos/ucla.jpg" alt="Logo UCLA" class="logo">
+                    </div>
+                    <h1 class="title">Crear Horario UCLA</h1>
+                    <img src="logos/dcee.jpg" alt="Logo DCCE" class="logo">
+                </div>
+            </div>
+        </header>
 
-        <label>Mostrar turnos</label>
-        <input type="checkbox" id="check_m" value="m" onclick="mostrar_turnos()"> <label for="">Mañana</label>
-        <br>
-        <input type="checkbox" id="check_t" onclick="mostrar_turnos()" value="t"> <label for="">Tarde</label>
-        <br>
-        <input type="checkbox" id="check_n" onclick="mostrar_turnos()" value="n"> <label for="">Noche</label>
-        <br>
-        <label>Materia</label>
-        <input type="text" id="materia">
-        <br>
-        <label>Salon</label>
-        <input type="number" id="salon_num">
-        <br>
-        <label>Profesor</label>
-        <input type="text" id="prof_nom">
-        <br>
-        <label for="">Selecciona el dia</label>
-        <select id="dia">
-            <option value="">N/A</option>
-            <option value="1">Lunes</option>
-            <option value="2">Martes</option>
-            <option value="3">Miercoles</option>
-            <option value="4">Jueves</option>
-            <option value="5">Viernes</option>
-            <option value="6">Sabado</option>
-        </select>
-        <br>
-        <label for="">Selecciona el turno</label>
-        <select id="turno" onchange="cambia_turnos()">
-            <option value="">N/A</option>
-            <option value="m">Mañana</option>
-            <option value="t">Tarde</option>
-            <option value="n">Noche</option>
-        </select>
-        <label>Hora de Entrada</label>
-        <select id="hora_entrada">
-        </select>
-        <br>
-        <label>Hora de Salida</label>
-        <select id="hora_salida">
-        </select>
-        <br>
-        <input type="checkbox" id="espacio" name="espacio" value="true">
-        <label for="espacio">Espacio libre</label>
-        <br>
-        <button onclick="registrar()">Registrar</button>
-        <button onclick="PrintTable();" value="Print">Imprimir</button>
-        <button onclick="limpiar_tabla()">Limpiar tabla actual</button>
-        <div id="dvContents">
-            <div id="hidden_m" hidden>
-                <h2 style="text-align: center">Mañana</h2>
-                <table id="m">
-                    <thead>
-                        <tr>
-                            <th>Bloque</th>
-                            <th id="lunes">Lunes</th>
-                            <th id="martes">Martes</th>
-                            <th id="miercoles">Miercoles</th>
-                            <th id="jueves">Jueves</th>
-                            <th id="viernes">Viernes</th>
-                            <th id="sabado">Sabado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="turno_m">
-                        <tr id="1m">
-                            <td>7:25-8:10</td>
-                        </tr>
-                        <tr id="2m">
-                            <td>8:10-8:55</td>
-                        </tr>
-                        <tr id="3m">
-                            <td>9:00-9:45</td>
-                        </tr>
-                        <tr id="4m">
-                            <td>9:45-10:35</td>
-                        </tr>
-                        <tr id="5m">
-                            <td>10:35-11:20</td>
-                        </tr>
-                        <tr id="6m">
-                            <td>11:25-12:05</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
+        <main class="main-content">
+            <div class="info-box">
+                FORMAR EL HORARIO DESEADO<br>
+                AGREGUE LOS HORARIOS EN ORDEN
             </div>
 
-            <div id="hidden_t" hidden>
-                <h2 style="text-align: center">Tarde</h2>
-                <table id="t">
-                    <thead>
-                        <tr>
-                            <th>Bloque</th>
-                            <th id="lunes">Lunes</th>
-                            <th id="martes">Martes</th>
-                            <th id="miercoles">Miercoles</th>
-                            <th id="jueves">Jueves</th>
-                            <th id="viernes">Viernes</th>
-                            <th id="sabado">Sabado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="turno_t">
-                        <tr id="1t">
-                            <td>12:40-1:20</td>
-                        </tr>
-                        <tr id="2t">
-                            <td>1:20-2:00</td>
-                        </tr>
-                        <tr id="3t">
-                            <td>2:00-2:40</td>
-                        </tr>
-                        <tr id="4t">
-                            <td>2:45-3:25</td>
-                        </tr>
-                        <tr id="5t">
-                            <td>3:25-4:05</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
+            <div class="controls-section">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><i class="fas fa-sun"></i> Mostrar turnos</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="check_m" value="m">
+                            <label for="check_m">Mañana</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="check_t" value="t">
+                            <label for="check_t">Tarde</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="check_n" value="n">
+                            <label for="check_n">Noche</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="materia"><i class="fas fa-book"></i> Materia</label>
+                        <input type="text" id="materia" class="form-control" placeholder="Nombre de la materia">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="salon_num"><i class="fas fa-door-open"></i> Salón</label>
+                        <input type="number" id="salon_num" class="form-control" placeholder="Número de salón">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prof_nom"><i class="fas fa-chalkboard-teacher"></i> Profesor</label>
+                        <input type="text" id="prof_nom" class="form-control" placeholder="Nombre del profesor">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dia"><i class="fas fa-calendar-day"></i> Día</label>
+                        <select id="dia" class="form-control">
+                            <option value="">Seleccione un día</option>
+                            <option value="1">Lunes</option>
+                            <option value="2">Martes</option>
+                            <option value="3">Miércoles</option>
+                            <option value="4">Jueves</option>
+                            <option value="5">Viernes</option>
+                            <option value="6">Sábado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turno"><i class="fas fa-clock"></i> Turno</label>
+                        <select id="turno" class="form-control">
+                            <option value="">Seleccione un turno</option>
+                            <option value="m">Mañana</option>
+                            <option value="t">Tarde</option>
+                            <option value="n">Noche</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora_entrada"><i class="fas fa-sign-in-alt"></i> Hora de Entrada</label>
+                        <select id="hora_entrada" class="form-control"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora_salida"><i class="fas fa-sign-out-alt"></i> Hora de Salida</label>
+                        <select id="hora_salida" class="form-control"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="espacio" name="espacio" value="true">
+                            <label for="espacio">Espacio libre</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="registrar()">
+                        <i class="fas fa-save"></i> Registrar
+                    </button>
+                    <button class="btn btn-success" onclick="PrintTable()">
+                        <i class="fas fa-print"></i> Imprimir
+                    </button>
+                    <button class="btn btn-danger" onclick="limpiar_tabla()">
+                        <i class="fas fa-trash-alt"></i> Limpiar Tabla
+                    </button>
+                </div>
             </div>
 
-            <div id="hidden_n" hidden>
-                <h2 style="text-align: center">Noche</h2>
-                <table id="n">
-                    <thead>
-                        <tr>
-                            <th>Bloque</th>
-                            <th id="lunes">Lunes</th>
-                            <th id="martes">Martes</th>
-                            <th id="miercoles">Miercoles</th>
-                            <th id="jueves">Jueves</th>
-                            <th id="viernes">Viernes</th>
-                            <th id="sabado">Sabado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="turno_n">
-                        <tr id="1n">
-                            <td>5:00-5:40</td>
-                        </tr>
-                        <tr id="2n">
-                            <td>5:40-6:20</td>
-                        </tr>
-                        <tr id="3n">
-                            <td>6:20-7:00</td>
-                        </tr>
-                        <tr id="4n">
-                            <td>7:05-7:45</td>
-                        </tr>
-                        <tr id="5n">
-                            <td>7:45-8:25</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
+            <div class="tables-container" id="dvContents">
+                <div id="hidden_m" hidden>
+                    <div class="turno-section">
+                        <div class="turno-header">Turno de Mañana</div>
+                        <table id="m">
+                            <thead>
+                                <tr>
+                                    <th>Bloque</th>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="turno_m">
+                                <tr id="1m">
+                                    <td class="hora-col">7:25-8:10</td>
+                                </tr>
+                                <tr id="2m">
+                                    <td class="hora-col">8:10-8:55</td>
+                                </tr>
+                                <tr id="3m">
+                                    <td class="hora-col">9:00-9:45</td>
+                                </tr>
+                                <tr id="4m">
+                                    <td class="hora-col">9:45-10:35</td>
+                                </tr>
+                                <tr id="5m">
+                                    <td class="hora-col">10:35-11:20</td>
+                                </tr>
+                                <tr id="6m">
+                                    <td class="hora-col">11:25-12:05</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-        </div>
-    </main>
+                <div id="hidden_t" hidden>
+                    <div class="turno-section">
+                        <div class="turno-header">Turno de Tarde</div>
+                        <table id="t">
+                            <thead>
+                                <tr>
+                                    <th>Bloque</th>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="turno_t">
+                                <tr id="1t">
+                                    <td class="hora-col">12:40-1:20</td>
+                                </tr>
+                                <tr id="2t">
+                                    <td class="hora-col">1:20-2:00</td>
+                                </tr>
+                                <tr id="3t">
+                                    <td class="hora-col">2:00-2:40</td>
+                                </tr>
+                                <tr id="4t">
+                                    <td class="hora-col">2:45-3:25</td>
+                                </tr>
+                                <tr id="5t">
+                                    <td class="hora-col">3:25-4:05</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="hidden_n" hidden>
+                    <div class="turno-section">
+                        <div class="turno-header">Turno de Noche</div>
+                        <table id="n">
+                            <thead>
+                                <tr>
+                                    <th>Bloque</th>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="turno_n">
+                                <tr id="1n">
+                                    <td class="hora-col">5:00-5:40</td>
+                                </tr>
+                                <tr id="2n">
+                                    <td class="hora-col">5:40-6:20</td>
+                                </tr>
+                                <tr id="3n">
+                                    <td class="hora-col">6:20-7:00</td>
+                                </tr>
+                                <tr id="4n">
+                                    <td class="hora-col">7:05-7:45</td>
+                                </tr>
+                                <tr id="5n">
+                                    <td class="hora-col">7:45-8:25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ==========================
+        // VARIABLES GLOBALES
+        // ==========================
+        const value_m = ["", "1", "2", "3", "4", "5", "6"];
+        const value_t = ["", "1", "2", "3", "4", "5"];
+        const value_n = ["", "1", "2", "3", "4", "5"];
+
+        const texto_m = ["N/A", "7:25-8:10", "8:10-8:55", "9:00-9:45", "9:45-10:35", "10:35-11:20", "11:25-12:05"];
+        const texto_t = ["N/A", "12:40-1:20", "1:20-2:00", "2:00-2:40", "2:45-3:25", "3:25-4:05"];
+        const texto_n = ["N/A", "5:00-5:40", "5:40-6:20", "6:20-7:00", "7:05-7:45", "7:45-8:25"];
+
+        const dias = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
+
+        // Estructura para almacenar todos los eventos
+        const eventos = {
+            m: Array(7).fill().map(() => Array(6).fill(null)), // 7 bloques x 6 días
+            t: Array(6).fill().map(() => Array(6).fill(null)), // 6 bloques x 6 días
+            n: Array(6).fill().map(() => Array(6).fill(null))  // 6 bloques x 6 días
+        };
+
+        // ==========================
+        // INICIALIZACIÓN
+        // ==========================
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicializar eventos de los controles
+            document.querySelectorAll('#check_m, #check_t, #check_n').forEach(checkbox => {
+                checkbox.addEventListener('change', mostrar_turnos);
+            });
+
+            document.getElementById('turno').addEventListener('change', cambia_turnos);
+
+            // Mostrar todos los turnos inicialmente
+            document.querySelectorAll('#check_m, #check_t, #check_n').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            mostrar_turnos();
+
+            // Inicializar selector de turnos
+            cambia_turnos();
+        });
+
+        // ==========================
+        // FUNCIONES DE GESTIÓN DE HORARIOS
+        // ==========================
+
+        // Función para mostrar/ocultar turnos según los checkboxes
+        function mostrar_turnos() {
+            document.getElementById('hidden_m').hidden = !document.getElementById('check_m').checked;
+            document.getElementById('hidden_t').hidden = !document.getElementById('check_t').checked;
+            document.getElementById('hidden_n').hidden = !document.getElementById('check_n').checked;
+        }
+
+        // Función para cambiar las opciones de hora según el turno seleccionado
+        function cambia_turnos() {
+            const turno = document.getElementById('turno').value;
+            const hora_entrada = document.getElementById('hora_entrada');
+            const hora_salida = document.getElementById('hora_salida');
+
+            hora_entrada.innerHTML = '';
+            hora_salida.innerHTML = '';
+
+            if (turno) {
+                let value_arr, texto_arr;
+
+                switch (turno) {
+                    case 'm':
+                        value_arr = value_m;
+                        texto_arr = texto_m;
+                        break;
+                    case 't':
+                        value_arr = value_t;
+                        texto_arr = texto_t;
+                        break;
+                    case 'n':
+                        value_arr = value_n;
+                        texto_arr = texto_n;
+                        break;
+                }
+
+                for (let i = 0; i < value_arr.length; i++) {
+                    const option1 = document.createElement('option');
+                    option1.value = value_arr[i];
+                    option1.text = texto_arr[i];
+                    hora_entrada.appendChild(option1);
+
+                    const option2 = document.createElement('option');
+                    option2.value = value_arr[i];
+                    option2.text = texto_arr[i];
+                    hora_salida.appendChild(option2);
+                }
+            } else {
+                const option1 = document.createElement('option');
+                option1.value = '';
+                option1.text = 'N/A';
+                hora_entrada.appendChild(option1);
+
+                const option2 = document.createElement('option');
+                option2.value = '';
+                option2.text = 'N/A';
+                hora_salida.appendChild(option2);
+            }
+        }
+
+        // Función para registrar un nuevo evento en el horario
+        function registrar() {
+            const materia = document.getElementById('materia').value.trim();
+            const dia = parseInt(document.getElementById('dia').value);
+            const profesor = document.getElementById('prof_nom').value.trim();
+            const salon = document.getElementById('salon_num').value.trim();
+            const turno = document.getElementById('turno').value;
+            const entrada = parseInt(document.getElementById('hora_entrada').value);
+            const salida = parseInt(document.getElementById('hora_salida').value);
+            const esEspacio = document.getElementById('espacio').checked;
+
+            // Validaciones básicas
+            if (!turno) {
+                alert('Por favor seleccione un turno');
+                return;
+            }
+
+            if (isNaN(dia) || dia < 1 || dia > 6) {
+                alert('Por favor seleccione un día válido');
+                return;
+            }
+
+            if (isNaN(entrada) || isNaN(salida) || entrada < 1 || salida < 1) {
+                alert('Por favor seleccione horas válidas');
+                return;
+            }
+
+            if (entrada > salida) {
+                alert('La hora de entrada no puede ser posterior a la hora de salida');
+                return;
+            }
+
+            if (!esEspacio && materia === '') {
+                alert('Por favor ingrese el nombre de la materia');
+                return;
+            }
+
+            // Verificar disponibilidad
+            const diaIndex = dia - 1; // Convertir a índice base 0
+
+            // Verificar si hay conflicto en alguno de los bloques
+            let conflicto = false;
+            for (let bloque = entrada; bloque <= salida; bloque++) {
+                if (eventos[turno][bloque] && eventos[turno][bloque][diaIndex]) {
+                    conflicto = true;
+                    break;
+                }
+            }
+
+            if (conflicto) {
+                alert('Conflicto de horario: Uno o más bloques ya están ocupados');
+                return;
+            }
+
+            // Crear el evento
+            const evento = {
+                materia: esEspacio ? 'ESPACIO LIBRE' : materia,
+                profesor: profesor || 'N/A',
+                salon: salon || 'N/A',
+                entrada,
+                salida,
+                esEspacio
+            };
+
+            // Guardar el evento en todos los bloques que ocupa
+            for (let bloque = entrada; bloque <= salida; bloque++) {
+                if (!eventos[turno][bloque]) eventos[turno][bloque] = Array(6).fill(null);
+                eventos[turno][bloque][diaIndex] = evento;
+            }
+
+            // Actualizar la tabla
+            actualizarTablaTurno(turno);
+
+            // Limpiar formulario
+            limpiarFormulario();
+        }
+
+        // Función para actualizar la tabla de un turno específico
+        function actualizarTablaTurno(turno) {
+            const tbody = document.getElementById(`turno_${turno}`);
+            tbody.innerHTML = '';
+
+            let numBloques, horas;
+            switch (turno) {
+                case 'm':
+                    numBloques = 6;
+                    horas = texto_m.slice(1);
+                    break;
+                case 't':
+                    numBloques = 5;
+                    horas = texto_t.slice(1);
+                    break;
+                case 'n':
+                    numBloques = 5;
+                    horas = texto_n.slice(1);
+                    break;
+            }
+
+            for (let bloque = 1; bloque <= numBloques; bloque++) {
+                const tr = document.createElement('tr');
+                tr.id = `${bloque}${turno}`;
+
+                // Celda de hora
+                const horaTd = document.createElement('td');
+                horaTd.className = 'hora-col';
+                horaTd.textContent = horas[bloque - 1];
+                tr.appendChild(horaTd);
+
+                for (let dia = 0; dia < 6; dia++) {
+                    const evento = eventos[turno][bloque] ? eventos[turno][bloque][dia] : null;
+
+                    // Si hay un evento que comienza en este bloque
+                    if (evento && evento.entrada === bloque) {
+                        const duracion = evento.salida - evento.entrada + 1;
+                        const td = document.createElement('td');
+
+                        if (duracion > 1) {
+                            td.rowSpan = duracion;
+                        }
+
+                        td.className = 'filled-cell';
+                        if (evento.esEspacio) {
+                            td.classList.add('espacio-libre');
+                        }
+
+                        td.innerHTML = `
+                            <div class="event-info">
+                                <div class="event-title">${evento.materia}</div>
+                                <div>Prof: ${evento.profesor}</div>
+                                <div>Salón: ${evento.salon}</div>
+                            </div>
+                        `;
+
+                        tr.appendChild(td);
+                    }
+                    // Si no hay evento o el evento no comienza aquí
+                    else {
+                        // Si no hay evento, crear celda vacía
+                        if (!evento) {
+                            const td = document.createElement('td');
+                            tr.appendChild(td);
+                        }
+                        // Si hay un evento que no comienza aquí, no agregamos celda
+                        // (porque ya se agregó con rowspan)
+                    }
+                }
+
+                tbody.appendChild(tr);
+            }
+        }
+
+        // Función para limpiar el formulario
+        function limpiarFormulario() {
+            document.getElementById('materia').value = '';
+            document.getElementById('prof_nom').value = '';
+            document.getElementById('salon_num').value = '';
+            document.getElementById('hora_entrada').value = '';
+            document.getElementById('hora_salida').value = '';
+            document.getElementById('dia').value = '';
+            document.getElementById('turno').value = '';
+            document.getElementById('espacio').checked = false;
+        }
+
+        // Función para imprimir el horario
+        function PrintTable() {
+            // Primero mostrar todos los turnos para imprimir
+            document.querySelectorAll('#check_m, #check_t, #check_n').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            mostrar_turnos();
+
+            setTimeout(() => {
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Horario Personalizado - UCLA</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; }
+                            .print-header { text-align: center; margin-bottom: 20px; }
+                            .print-logo { height: 80px; margin: 0 20px; }
+                            .print-title { font-size: 24px; font-weight: bold; margin: 10px 0; }
+                            .turno-header { background-color: #1a3a6c; color: white; padding: 10px; text-align: center; font-size: 18px; margin-top: 20px; }
+                            table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+                            th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+                            th { background-color: #f2f2f2; }
+                            .hora-col { background-color: #e6f7ff; font-weight: bold; width: 100px; }
+                            .filled-cell { background-color: #e0f2f1; }
+                            .espacio-libre { background-color: #ffebee; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="print-header">
+                            <img src="logos/ucla.jpg" class="print-logo">
+                            <div class="print-title">Horario Personalizado - UCLA 2024-2</div>
+                            <img src="logos/dcee.jpg" class="print-logo">
+                        </div>
+                        ${document.getElementById('dvContents').innerHTML}
+                        <div style="text-align: center; margin-top: 30px; font-style: italic;">
+                            Generado el ${new Date().toLocaleDateString()}
+                        </div>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+                printWindow.print();
+            }, 100);
+        }
+
+        // Función para limpiar la tabla de un turno
+        function limpiar_tabla() {
+            const turno = prompt("Escoja el turno para limpiar (m=mañana, t=tarde, n=noche)");
+            if (turno && ['m', 't', 'n'].includes(turno)) {
+                if (confirm(`¿Está seguro que desea limpiar todo el turno de ${turno === 'm' ? 'mañana' : turno === 't' ? 'tarde' : 'noche'}?`)) {
+                    // Reiniciar los eventos del turno
+                    eventos[turno] = Array(eventos[turno].length).fill().map(() => Array(6).fill(null));
+                    actualizarTablaTurno(turno);
+                    alert('Turno limpiado exitosamente');
+                }
+            } else {
+                alert('Turno no válido. Use m, t o n');
+            }
+        }
+    </script>
 </body>
 
 </html>
