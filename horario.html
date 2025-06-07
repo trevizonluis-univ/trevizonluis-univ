@@ -114,6 +114,9 @@
                     <button class="btn btn-danger" onclick="limpiar_tabla()">
                         <i class="fas fa-trash-alt"></i> Limpiar Tabla
                     </button>
+                    <button class="btn btn-primary" onclick="volverIndex()">
+                        <i class="fas fa-save"></i> Volver
+                    </button>
                 </div>
             </div>
 
@@ -283,6 +286,10 @@
             document.getElementById('hidden_m').hidden = !document.getElementById('check_m').checked;
             document.getElementById('hidden_t').hidden = !document.getElementById('check_t').checked;
             document.getElementById('hidden_n').hidden = !document.getElementById('check_n').checked;
+        }
+
+        function volverIndex(){
+            window.location.href = "index.html";
         }
 
         // Función para cambiar las opciones de hora según el turno seleccionado
