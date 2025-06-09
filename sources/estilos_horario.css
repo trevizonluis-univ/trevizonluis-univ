@@ -299,9 +299,27 @@ th {
     z-index: 1;
 }
 
+/* MEJORAS PARA IMÁGENES */
+.resultados {
+    overflow: visible !important;
+}
+
+.resultados img {
+    min-width: 100%;
+    width: auto;
+    max-width: none;
+    display: block;
+    margin: 0 auto;
+}
+
+/* MEJORAS RESPONSIVAS */
 @media (max-width: 992px) {
     .form-grid {
         grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 2.2rem;
     }
 }
 
@@ -313,7 +331,7 @@ th {
     }
 
     .title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .button-group {
@@ -325,11 +343,113 @@ th {
     }
 
     table {
+        min-width: 100%;
         font-size: 0.85rem;
     }
 
     th,
     td {
         padding: 8px 5px;
+    }
+
+    .hora-col {
+        width: 80px;
+        min-width: 70px;
+    }
+
+    .turno-header {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .main-content {
+        padding: 20px 15px;
+    }
+
+    th,
+    td {
+        padding: 6px 4px;
+        font-size: 0.8rem;
+    }
+
+    .hora-col {
+        width: 70px;
+        min-width: 60px;
+    }
+
+    .event-info {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 375px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        border-radius: 10px;
+    }
+
+    .title {
+        font-size: 1.3rem;
+        padding: 5px 0;
+    }
+
+    .main-content {
+        padding: 15px 10px;
+    }
+
+    .form-control {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+
+    .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    table {
+        font-size: 0.75rem;
+    }
+
+    th,
+    td {
+        padding: 6px 4px;
+    }
+
+    .hora-col {
+        width: 65px;
+        min-width: 60px;
+    }
+
+    .turno-header {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .event-info {
+        font-size: 0.7rem;
     }
 }
