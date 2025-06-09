@@ -251,21 +251,167 @@ select.form-control {
 }
 
 @media (max-width: 768px) {
+
+    /* Ajustes generales para móviles */
+    body {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .container {
+        border-radius: 8px;
+    }
+
+    /* Header responsive */
+    .header {
+        padding: 12px;
+    }
+
     .logo-container {
         flex-direction: column;
-        text-align: center;
+        gap: 10px;
+        padding: 8px 0;
+    }
+
+    .left-logos {
+        display: flex;
+        justify-content: center;
         gap: 15px;
+        width: 100%;
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+        margin: 0;
     }
 
     .title {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        padding: 5px 0;
+        line-height: 1.3;
     }
 
+    /* Contenido principal */
+    .main-content {
+        padding: 15px;
+    }
+
+    .info-box {
+        padding: 10px;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    /* Formularios */
+    .controls-section {
+        padding: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-control {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+
+    /* Botones */
     .button-group {
         grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 15px;
     }
 
     .btn {
         width: 100%;
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+
+    /* Resultados - Optimización especial para imágenes */
+    .resultados {
+        padding: 12px;
+        overflow-x: auto;
+    }
+
+    .empty-result {
+        padding: 20px 0;
+    }
+
+    .empty-result i {
+        font-size: 2rem;
+    }
+
+    /* Estilos para cuando se muestran las imágenes de horarios */
+    .result-item {
+        padding: 12px;
+        margin-bottom: 15px;
+        overflow-x: auto;
+    }
+
+    .result-item img {
+        max-width: 100%;
+        height: auto;
+        min-width: 300px;
+        /* Ancho mínimo para mantener legibilidad */
+        border-radius: 6px;
+    }
+
+    .result-item p {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    /* Rotación de pantalla */
+    @media screen and (orientation: landscape) {
+        .result-item img {
+            max-height: 70vh;
+            width: auto;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Ajustes adicionales para pantallas muy pequeñas */
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .title {
+        font-size: 1.3rem;
+    }
+
+    /* Mejora para imágenes en pantallas pequeñas */
+    .result-item img {
+        min-width: 280px;
+        /* Ajuste fino para pantallas muy pequeñas */
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+
+    #horarios img {
+        min-width: 200%;
+        height: 200%;
+        margin: 0 auto;
+        overflow: visible
+    }
+}
+
+/* Tablet en horizontal - mejor visualización de imágenes */
+@media (min-width: 769px) and (max-width: 992px) {
+    .result-item img {
+        max-width: 90%;
+    }
+
+    .logo {
+        width: 80px;
+        height: 80px;
     }
 }

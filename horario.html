@@ -288,7 +288,7 @@
             document.getElementById('hidden_n').hidden = !document.getElementById('check_n').checked;
         }
 
-        function volverIndex(){
+        function volverIndex() {
             window.location.href = "index.html";
         }
 
@@ -505,43 +505,125 @@
         }
 
         // Función para imprimir el horario
+
         function PrintTable() {
-            setTimeout(() => {
-                const printWindow = window.open('', '_blank');
-                printWindow.document.write(`
-                    <html>
-                    <head>
-                        <title>Horario Personalizado - UCLA</title>
-                        <style>
-                            body { font-family: Arial, sans-serif; margin: 20px; }
-                            .print-header { text-align: center; margin-bottom: 20px; }
-                            .print-logo { height: 80px; margin: 0 20px; }
-                            .print-title { font-size: 24px; font-weight: bold; margin: 10px 0; }
-                            .turno-header { background-color: #1a3a6c; color: white; padding: 10px; text-align: center; font-size: 18px; margin-top: 20px; }
-                            table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-                            th, td { border: 1px solid #000; padding: 8px; text-align: center; }
-                            th { background-color: #f2f2f2; }
-                            .hora-col { background-color: #e6f7ff; font-weight: bold; width: 100px; }
-                            .filled-cell { background-color: #e0f2f1; }
-                            .espacio-libre { background-color: #ffebee; }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="print-header">
-                            <img src="logos/ucla.jpg" class="print-logo">
+            // Preparar los recursos antes de abrir la ventana
+            const currentDate = new Date().toLocaleDateString();
+            const content = document.getElementById('dvContents').innerHTML;
+            const css = ` <style>
+                body { 
+                    font-family: Arial, sans-serif; 
+                    margin: 20px; 
+                }
+                .print-header { 
+                    text-align: center; 
+                    margin-bottom: 20px; 
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 20px;
+                }
+                .print-logo { 
+                    height: 80px; 
+                    margin: 0; 
+                }
+                .print-title { 
+                    font-size: 24px; 
+                    font-weight: bold; 
+                    margin: 10px 0; 
+                }
+                .turno-header { 
+                    background-color: #1a3a6c; 
+                    color: white; 
+                    padding: 10px; 
+                    text-align: center; 
+                    font-size: 18px; 
+                    margin-top: 20px; 
+                }
+                table { 
+                    width: 100%; 
+                    border-collapse: collapse; 
+                    margin-bottom: 30px; 
+                }
+                th, td { 
+                    border: 1px solid #000; 
+                    padding: 8px; 
+                    text-align: center; 
+                }
+                th { 
+                    background-color: #f2f2f2; 
+                }
+                .hora-col { 
+                    background-color: #e6f7ff; 
+                    font-weight: bold; 
+                    width: 100px; 
+                }
+                .filled-cell { 
+                    background-color: #e0f2f1; 
+                }
+                .espacio-libre { 
+                    background-color: #ffebee; 
+                }
+                .print-footer {
+                    text-align: center; 
+                    margin-top: 30px; 
+                    font-style: italic;
+                }
+                @media print {
+                    body { 
+                        margin: 0.5cm; 
+                    }
+                    .no-print { 
+                        display: none !important; 
+                    }
+                }
+                </style>
+            `;
+            const script = document.createElement('script');
+            script.innerHTML = ` window.onload = function() {
+                            setTimeout(function() {
+                                window.print();
+                                window.onafterprint = function() {
+                                    window.close();
+                                };
+                            }, 200);
+                        };`
+            // Abrir ventana de impresión
+            const printWindow = window.open('', '_blank');
+
+            // Escribir el contenido del documento
+            printWindow.document.write(`<html>
+                <head>
+                    <title>Horario Personalizado - UCLA</title>
+                    ${css}
+                    
+                </head>
+                <body>
+                    <div class="print-header">
+                        <img src="logos/ucla.jpg" class="print-logo" alt="Logo UCLA">
+                        <div>
                             <div class="print-title">Horario Personalizado - UCLA 2025-1</div>
-                            <img src="logos/dcee.jpg" class="print-logo">
+                            <div>${currentDate}</div>
                         </div>
-                        ${document.getElementById('dvContents').innerHTML}
-                        <div style="text-align: center; margin-top: 30px; font-style: italic;">
-                            Generado el ${new Date().toLocaleDateString()}
-                        </div>
+                        <img src="logos/dcee.jpg" class="print-logo" alt="Logo DCEE">
+                    </div>
+                    ${content}
+                    <div class="print-footer">
+                        Generado el ${currentDate}
+                    </div>
                     </body>
                     </html>
                 `);
-                printWindow.document.close();
-                printWindow.print();
-            }, 100);
+            printWindow.document.write(script.outerHTML);
+
+
+            // Cerrar el documento para finalizar la escritura
+            printWindow.document.close();
+
+            // Manejar caso de bloqueo de popups
+            if (!printWindow || printWindow.closed || typeof printWindow.closed === 'undefined') {
+                alert('Por favor permite popups para esta página para poder imprimir.');
+            }
         }
 
         // Función para limpiar la tabla de un turno
