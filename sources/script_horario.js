@@ -34,6 +34,89 @@ const value_n = ["", "1", "2", "3", "4", "5"];
 const texto_m = ["N/A", "7:25-8:10", "8:10-8:55", "9:00-9:45", "9:45-10:35", "10:35-11:20", "11:25-12:05"];
 const texto_t = ["N/A", "12:40-1:20", "1:20-2:00", "2:00-2:40", "2:45-3:25", "3:25-4:05"];
 const texto_n = ["N/A", "5:00-5:40", "5:40-6:20", "6:20-7:00", "7:05-7:45", "7:45-8:25"];
+const estilos = ` <style>
+                    body { 
+                        font-family: Arial, sans-serif; 
+                        margin: 20px; 
+                    }
+                    .print-header { 
+                        text-align: center; 
+                        margin-bottom: 20px; 
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 20px;
+                    }
+                    .print-logo { 
+                        height: 80px; 
+                        margin: 0; 
+                    }
+                    .print-title { 
+                        font-size: 24px; 
+                        font-weight: bold; 
+                        margin: 10px 0; 
+                    }
+                    .turno-header { 
+                        background-color: #1a3a6c; 
+                        color: white; 
+                        padding: 10px; 
+                        text-align: center; 
+                        font-size: 18px; 
+                        margin-top: 20px; 
+                    }
+                    table { 
+                        width: 100%; 
+                        border-collapse: collapse; 
+                        margin-bottom: 30px; 
+                    }
+                    th, td { 
+                        border: 1px solid #000; 
+                        padding: 8px; 
+                        text-align: center; 
+                    }
+                    th { 
+                        background-color: #f2f2f2; 
+                    }
+                    .hora-col { 
+                        background-color: #e6f7ff; 
+                        font-weight: bold; 
+                        width: 100px; 
+                    }
+                    .filled-cell { 
+                        background-color: #e0f2f1; 
+                    }
+                    .espacio-libre { 
+                        background-color: #ffebee; 
+                    }
+                    .print-footer {
+                        text-align: center; 
+                        margin-top: 30px; 
+                        font-style: italic;
+                    }
+                    @media print {
+                        body { 
+                            margin: 0.5cm; 
+                        }
+                        .no-print { 
+                            display: none !important; 
+                        }
+                        @page {
+                            size: legal;
+                        }
+                    }
+                </style>
+            `
+const currentDate = new Date().toLocaleDateString()
+const headers = `
+                <div class="print-header">
+                    <img src="logos/ucla.jpg" class="print-logo" alt="Logo UCLA">
+                    <div>
+                        <div class="print-title">Horario Personalizado - UCLA 2025-1</div>
+                        <div>${currentDate}</div>
+                    </div>
+                    <img src="logos/dcee.jpg" class="print-logo" alt="Logo DCEE">
+                </div>
+    `
 
 // Días de la semana (lunes a sábado)
 const dias = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
@@ -322,136 +405,8 @@ function limpiarFormulario() {
     document.getElementById('turno').value = '';
 }
 
-/**
- * Genera una ventana de impresión con el horario completo
- * Incluye:
- * - Logo institucional
- * - Fecha actual
- * - Tablas de horarios visibles
- * - Estilos optimizados para impresión
- */
-function PrintTable() {
-    // Preparar recursos
-    const currentDate = new Date().toLocaleDateString();
-    const content = document.getElementById('dvContents').innerHTML;
+// Construir documento de impresión
 
-    // Estilos CSS para impresión
-    const css = ` <style>
-                    body { 
-                        font-family: Arial, sans-serif; 
-                        margin: 20px; 
-                    }
-                    .print-header { 
-                        text-align: center; 
-                        margin-bottom: 20px; 
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 20px;
-                    }
-                    .print-logo { 
-                        height: 80px; 
-                        margin: 0; 
-                    }
-                    .print-title { 
-                        font-size: 24px; 
-                        font-weight: bold; 
-                        margin: 10px 0; 
-                    }
-                    .turno-header { 
-                        background-color: #1a3a6c; 
-                        color: white; 
-                        padding: 10px; 
-                        text-align: center; 
-                        font-size: 18px; 
-                        margin-top: 20px; 
-                    }
-                    table { 
-                        width: 100%; 
-                        border-collapse: collapse; 
-                        margin-bottom: 30px; 
-                    }
-                    th, td { 
-                        border: 1px solid #000; 
-                        padding: 8px; 
-                        text-align: center; 
-                    }
-                    th { 
-                        background-color: #f2f2f2; 
-                    }
-                    .hora-col { 
-                        background-color: #e6f7ff; 
-                        font-weight: bold; 
-                        width: 100px; 
-                    }
-                    .filled-cell { 
-                        background-color: #e0f2f1; 
-                    }
-                    .espacio-libre { 
-                        background-color: #ffebee; 
-                    }
-                    .print-footer {
-                        text-align: center; 
-                        margin-top: 30px; 
-                        font-style: italic;
-                    }
-                    @media print {
-                        body { 
-                            margin: 0.5cm; 
-                        }
-                        .no-print { 
-                            display: none !important; 
-                        }
-                    }
-                </style>
-            `;
-
-    // Script para auto-impresión
-    const script = document.createElement('script');
-    script.innerHTML = `window.onload = function() {
-        setTimeout(function() {
-            window.print();
-            window.onafterprint = function() {
-                window.close();
-            };
-        }, 200);
-    }`;
-
-    // Abrir ventana de impresión
-    const printWindow = window.open('', '_blank');
-
-    // Construir documento de impresión
-    printWindow.document.write(`
-        <html>
-            <head>
-                <title>Horario Personalizado - UCLA</title>
-                ${css}
-            </head>
-            <body>
-                <div class="print-header">
-                    <img src="logos/ucla.jpg" class="print-logo" alt="Logo UCLA">
-                    <div>
-                        <div class="print-title">Horario Personalizado - UCLA 2025-1</div>
-                        <div>${currentDate}</div>
-                    </div>
-                    <img src="logos/dcee.jpg" class="print-logo" alt="Logo DCEE">
-                </div>
-                ${content}
-                <div class="print-footer">
-                    Generado el ${currentDate}
-                </div>
-            </body>
-        </html>
-    `);
-
-    printWindow.document.write(script.outerHTML);
-    printWindow.document.close();
-
-    // Manejar bloqueo de popups
-    if (!printWindow || printWindow.closed || typeof printWindow.closed === 'undefined') {
-        alert('Por favor permite popups para esta página para poder imprimir.');
-    }
-}
 
 /**
  * Limpia todos los eventos de un turno específico
@@ -475,3 +430,5 @@ function limpiar_tabla() {
         alert('Turno no válido. Use m, t o n');
     }
 }
+
+const jsonPrint = { printable: 'dvContents', type: 'html', style: estilos, header: headers, headerStyle: estilos, targetStyles: ["*"] }
