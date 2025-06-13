@@ -53,22 +53,30 @@ const eventos = {
 // ==========================
 // Configura los eventos iniciales al cargar la página
 document.addEventListener('DOMContentLoaded', function () {
-    // Event listeners para checkboxes de turnos
-    document.querySelectorAll('#check_m, #check_t, #check_n').forEach(checkbox => {
-        checkbox.addEventListener('change', mostrar_turnos);
-    });
+    // Solo ejecutar en la página principal de creación de horarios
+    if (document.getElementById('check_m')) {
+        // Event listeners para checkboxes de turnos
+        document.querySelectorAll('#check_m, #check_t, #check_n').forEach(checkbox => {
+            checkbox.addEventListener('change', mostrar_turnos);
+        });
 
-    // Event listener para selector de turnos
-    document.getElementById('turno').addEventListener('change', cambia_turnos);
+        // Event listener para selector de turnos
+        document.getElementById('turno').addEventListener('change', cambia_turnos);
 
-    // Mostrar todos los turnos inicialmente (checkboxes activados por defecto)
-    document.querySelectorAll('#check_m, #check_t, #check_n').forEach(checkbox => {
-        checkbox.checked = true;
-    });
-    mostrar_turnos();
+        // Mostrar todos los turnos inicialmente (checkboxes activados por defecto)
+        document.querySelectorAll('#check_m, #check_t, #check_n').forEach(checkbox => {
+            checkbox.checked = true;
+        });
+        mostrar_turnos();
 
-    // Inicializar selector de turnos
-    cambia_turnos();
+        // Inicializar selector de turnos
+        cambia_turnos();
+    }
+    
+    // Si estamos en la página de horario generado, cargar los datos
+    if (document.getElementById('schedule-content')) {
+        loadGeneratedSchedule();
+    }
 });
 
 // ==========================
@@ -323,133 +331,118 @@ function limpiarFormulario() {
 }
 
 /**
- * Genera una ventana de impresión con el horario completo
- * Incluye:
- * - Logo institucional
- * - Fecha actual
- * - Tablas de horarios visibles
- * - Estilos optimizados para impresión
+ * Genera y guarda el contenido del horario para ser mostrado en la página de visualización
  */
-function PrintTable() {
-    // Preparar recursos
-    const currentDate = new Date().toLocaleDateString();
-    const content = document.getElementById('dvContents').innerHTML;
+function GenerateScheduleContent() {
+    // Verificar si hay al menos un evento registrado
+    let hasEvents = false;
+    for (const turno in eventos) {
+        for (const bloque of eventos[turno]) {
+            if (bloque && bloque.some(evento => evento !== null)) {
+                hasEvents = true;
+                break;
+            }
+        }
+        if (hasEvents) break;
+    }
 
-    // Estilos CSS para impresión
-    const css = ` <style>
-                    body { 
-                        font-family: Arial, sans-serif; 
-                        margin: 20px; 
-                    }
-                    .print-header { 
-                        text-align: center; 
-                        margin-bottom: 20px; 
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 20px;
-                    }
-                    .print-logo { 
-                        height: 80px; 
-                        margin: 0; 
-                    }
-                    .print-title { 
-                        font-size: 24px; 
-                        font-weight: bold; 
-                        margin: 10px 0; 
-                    }
-                    .turno-header { 
-                        background-color: #1a3a6c; 
-                        color: white; 
-                        padding: 10px; 
-                        text-align: center; 
-                        font-size: 18px; 
-                        margin-top: 20px; 
-                    }
-                    table { 
-                        width: 100%; 
-                        border-collapse: collapse; 
-                        margin-bottom: 30px; 
-                    }
-                    th, td { 
-                        border: 1px solid #000; 
-                        padding: 8px; 
-                        text-align: center; 
-                    }
-                    th { 
-                        background-color: #f2f2f2; 
-                    }
-                    .hora-col { 
-                        background-color: #e6f7ff; 
-                        font-weight: bold; 
-                        width: 100px; 
-                    }
-                    .filled-cell { 
-                        background-color: #e0f2f1; 
-                    }
-                    .espacio-libre { 
-                        background-color: #ffebee; 
-                    }
-                    .print-footer {
-                        text-align: center; 
-                        margin-top: 30px; 
-                        font-style: italic;
-                    }
-                    @media print {
-                        body { 
-                            margin: 0.5cm; 
-                        }
-                        .no-print { 
-                            display: none !important; 
-                        }
-                    }
-                </style>
-            `;
+    if (!hasEvents) {
+        alert('No hay eventos registrados para generar el horario');
+        return;
+    }
 
-    // Script para auto-impresión
-    const script = document.createElement('script');
-    script.innerHTML = `window.onload = function() {
-        setTimeout(function() {
-            window.print();
-            window.onafterprint = function() {
-                window.close();
-            };
-        }, 200);
-    }`;
+    // Obtener los turnos visibles
+    const turnosVisibles = [];
+    if (document.getElementById('check_m').checked) turnosVisibles.push('m');
+    if (document.getElementById('check_t').checked) turnosVisibles.push('t');
+    if (document.getElementById('check_n').checked) turnosVisibles.push('n');
 
-    // Abrir ventana de impresión
-    const printWindow = window.open('', '_blank');
+    // Generar el HTML del horario
+    let scheduleHTML = '<div class="tables-container">';
+    
+    turnosVisibles.forEach(turno => {
+        const turnoNombre = turno === 'm' ? 'Mañana' : turno === 't' ? 'Tarde' : 'Noche';
+        const turnoId = turno === 'm' ? 'm' : turno === 't' ? 't' : 'n';
+        
+        scheduleHTML += `
+            <div class="turno-section">
+                <div class="turno-header">Turno de ${turnoNombre}</div>
+                <table id="${turnoId}">
+                    <thead>
+                        <tr>
+                            <th>Bloque</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+        
+        // Generar las filas de la tabla
+        const numBloques = turno === 'm' ? 6 : 5;
+        const horas = turno === 'm' ? texto_m.slice(1) : turno === 't' ? texto_t.slice(1) : texto_n.slice(1);
+        
+        for (let bloque = 1; bloque <= numBloques; bloque++) {
+            scheduleHTML += `<tr>`;
+            scheduleHTML += `<td class="hora-col">${horas[bloque - 1]}</td>`;
+            
+            for (let dia = 0; dia < 6; dia++) {
+                const evento = eventos[turno][bloque] ? eventos[turno][bloque][dia] : null;
+                
+                if (evento && evento.entrada === bloque) {
+                    const duracion = evento.salida - evento.entrada + 1;
+                    scheduleHTML += `<td class="filled-cell"${duracion > 1 ? ` rowspan="${duracion}"` : ''}>
+                        <div>
+                            <div class="event-title">${evento.materia}</div>
+                            <div>Prof: ${evento.profesor}</div>
+                            <div>Salón: ${evento.salon}</div>
+                        </div>
+                    </td>`;
+                } else if (!evento) {
+                    scheduleHTML += `<td></td>`;
+                }
+            }
+            
+            scheduleHTML += `</tr>`;
+        }
+        
+        scheduleHTML += `</tbody></table></div>`;
+    });
+    
+    scheduleHTML += '</div>';
 
-    // Construir documento de impresión
-    printWindow.document.write(`
-        <html>
-            <head>
-                <title>Horario Personalizado - UCLA</title>
-                ${css}
-            </head>
-            <body>
-                <div class="print-header">
-                    <img src="logos/ucla.jpg" class="print-logo" alt="Logo UCLA">
-                    <div>
-                        <div class="print-title">Horario Personalizado - UCLA 2025-1</div>
-                        <div>${currentDate}</div>
-                    </div>
-                    <img src="logos/dcee.jpg" class="print-logo" alt="Logo DCEE">
-                </div>
-                ${content}
-                <div class="print-footer">
-                    Generado el ${currentDate}
-                </div>
-            </body>
-        </html>
-    `);
+    // Guardar en sessionStorage y redirigir
+    sessionStorage.setItem('scheduleContent', scheduleHTML);
+    sessionStorage.setItem('generationDate', new Date().toLocaleString('es-ES'));
+    
+    // Redirigir a la página de visualización
+    window.location.href = 'horario_generado.html';
+}
 
-    printWindow.document.write(script.outerHTML);
-    printWindow.document.close();
-
-    // Manejar bloqueo de popups
-    if (!printWindow || printWindow.closed || typeof printWindow.closed === 'undefined') {
-        alert('Por favor permite popups para esta página para poder imprimir.');
+/**
+ * Carga el horario generado en la página de visualización
+ */
+function loadGeneratedSchedule() {
+    const scheduleContent = sessionStorage.getItem('scheduleContent');
+    const generationDate = sessionStorage.getItem('generationDate');
+    
+    if (scheduleContent) {
+        document.getElementById('schedule-content').innerHTML = scheduleContent;
+        if (generationDate) {
+            document.getElementById('generation-date').textContent = `Generado el: ${generationDate}`;
+        }
+    } else {
+        document.getElementById('schedule-content').innerHTML = `
+            <p style="text-align: center; color: #666;">
+                No hay horario disponible. Por favor, regrese a la página de creación de horarios.
+            </p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="window.location.href='horario.html'">Crear Horario</button>
+            </div>
+        `;
     }
 }
 

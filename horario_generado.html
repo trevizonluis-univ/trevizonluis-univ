@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horario Personalizado - UCLA - NO OFICIAL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="sources/estilos_horario.css">
+    <script src="sources/script_horario.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-bg"></div>
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="left-logos">
+                        <img src="logos/ucla.jpg" alt="Logo UCLA" class="logo">
+                    </div>
+                    <h1 class="title">Horario Personalizado - UCLA - NO OFICIAL</h1>
+                    <img src="logos/dcee.jpg" alt="Logo DCCE" class="logo">
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Aviso importante sobre recarga de página -->
+             <p class="creator-note"><i class="fas fa-info-circle"></i> <span class="creator-name">Ideado por: Luis Trevizon</span></p>
+            <div class="info-box" style="background: #fff3cd; border-left: 5px solid #ffc107; color: #856404; margin-bottom: 25px;">
+                <i class="fas fa-exclamation-triangle" style="margin-right: 10px; color: #ffc107;"></i>
+                <strong>¡Importante!</strong> Si recarga esta página, puede perder la información del horario generado. 
+                Para conservar su horario, se reocmienda utilizar la función de impresión o tome una captura de pantalla.
+                <br> NO ES OFICIAL
+            </div>
+
+            <!-- Información de generación -->
+            <div class="info-box">
+                <i class="fas fa-calendar-check" style="margin-right: 10px; color: var(--ucla-blue);"></i>
+                <span id="generation-date">Horario generado</span>
+            </div>
+
+            <!-- Botones de navegación -->
+            <div class="controls-section">
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="window.location.href='horario.html'">
+                        <i class="fas fa-edit"></i>
+                        Volver a Crear Horario
+                    </button>
+                    <button class="btn btn-info" onclick="window.location.href='index.html'">
+                        <i class="fas fa-home"></i>
+                        Volver al Inicio
+                    </button>
+                    <button class="btn btn-success" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                        Imprimir Horario
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenido del horario generado -->
+            <div id="schedule-content">
+                <!-- El contenido del horario se carga dinámicamente aquí -->
+            </div>
+
+            <!-- Nota del creador -->
+            <div class="creator-note">
+                <p>Sistema de Horarios UCLA - No Oficial</p>
+            </div>
+
+            <!-- Pie de página adicional -->
+            <div class="schedule-footer">
+                <p>Para modificar este horario, regrese a la página de creación de horarios</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Estilos adicionales para impresión -->
+    <style>
+        @media print {
+            .controls-section,
+            .info-box:first-of-type,
+            .creator-note,
+            .schedule-footer {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                padding: 0 !important;
+            }
+            
+            .container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+            
+            .header {
+                background: var(--ucla-blue) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .turno-header {
+                background: var(--ucla-blue) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .filled-cell {
+                background-color: #d1ecf1 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            table {
+                page-break-inside: avoid;
+            }
+            
+            .turno-section {
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Mejoras visuales adicionales */
+        .info-box i {
+            font-size: 1.1em;
+        }
+        
+        .btn i {
+            font-size: 1.1em;
+        }
+        
+        /* Efecto hover mejorado para botones */
+        .btn:hover i {
+            transform: scale(1.1);
+            transition: transform 0.2s ease;
+        }
+        
+        /* Responsividad mejorada para botones */
+        @media (max-width: 768px) {
+            .button-group {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Horario - UCLA</title>
+    <title>Crear Horario - UCLA - NO OFICIAL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="sources/estilos_horario.css">
     <script src="sources/script_horario.js"></script>
@@ -19,18 +19,20 @@
                     <div class="left-logos">
                         <img src="logos/ucla.jpg" alt="Logo UCLA" class="logo">
                     </div>
-                    <h1 class="title">Crear Horario UCLA</h1>
+                    <h1 class="title">Crear Horario - UCLA - NO OFICIAL</h1>
                     <img src="logos/dcee.jpg" alt="Logo DCCE" class="logo">
                 </div>
             </div>
         </header>
 
         <main class="main-content">
+            <p class="creator-note"><i class="fas fa-info-circle"></i> <span class="creator-name">Ideado por: Luis Trevizon</span></p>
             <div class="info-box">
                 FORMAR EL HORARIO DESEADO<br>
                 AGREGUE LOS HORARIOS EN ORDEN<br>
                 SE RECOMIENDA UTILIZAR EL MODO<br>
                 "SITIO PARA COMPUTADORA" SI ESTA EN TELEFONO MOVIL
+                <br> NO ES OFICIAL
             </div>
             <p class="creator-note"><i class="fas fa-info-circle"></i> <span class="creator-name">Ideado por: Luis Trevizon</span></p>
             <div class="controls-section">
@@ -111,8 +113,8 @@
                     <button class="btn btn-primary" onclick="registrar()">
                         <i class="fas fa-save"></i> Registrar
                     </button>
-                    <button class="btn btn-success" onclick="PrintTable()">
-                        <i class="fas fa-print"></i> Imprimir
+                    <button class="btn btn-success" onclick="GenerateScheduleContent()">
+                        <i class="fas fa-print"></i> Generar
                     </button>
                     <button class="btn btn-danger" onclick="limpiar_tabla()">
                         <i class="fas fa-trash-alt"></i> Limpiar Tabla
