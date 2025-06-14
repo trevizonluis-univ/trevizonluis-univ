@@ -44,7 +44,11 @@ const semestres_totales = {
     administracion_contaduria_7: ['m01', "m02", "t01", 'n01', 'n02'],
     administracion_contaduria_8: ['m01', "m02", "m03", 'n01', 'n02', 'n03', 'n04'],
     contaduria_9: ["m01", "m02", "m03", "n01", "n02", "n03"],
-    administracion_9: ["m01", "m02", "m03", "t01", "n01", "n03"]
+    administracion_9: ["m01", "m02", "m03", "t01", "n01", "n03"],
+    desarrollo_humano_1: ["m01", "m02"],
+    desarrollo_humano_2: ["m01", "t01"],
+    desarrollo_humano_3: ["t01", "t02"],
+    desarrollo_humano_4: ["m01"]
 };
 
 // ==========================
@@ -97,7 +101,18 @@ function getSemesterKey(carrera, nroSemestre) {
             nroSemestreAcomodado = 3;
         }
     }
-
+    else if (carrera === "desarrollo_humano") {
+        if (nroSemestre == 2 || nroSemestre >= 8) {
+            nroSemestreAcomodado = 4
+        }
+        else if (nroSemestre != 2 && nroSemestre != 1 && nroSemestre != 6) {
+            nroSemestreAcomodado = 2
+        }
+        else if (nroSemestre == 6) {
+            nroSemestreAcomodado = 3
+        }
+    }
+    console.log(`${carreraAcomodada}_${nroSemestreAcomodado}`)
     return `${carreraAcomodada}_${nroSemestreAcomodado}`;
 }
 
@@ -139,8 +154,10 @@ function getHorario() {
 
     // 2. Generar clave normalizada
     const key = getSemesterKey(carrera, nro_semestre);
+    console.log(key)
     // 3. Recuperar códigos de horario
     const especifico = semestres_totales[key];
+    console.log(especifico)
 
     if (!especifico) {
         alert("No se encontraron horarios para esta combinación");
