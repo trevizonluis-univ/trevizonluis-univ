@@ -47,8 +47,7 @@ const semestres_totales = {
     administracion_9: ["m01", "m02", "m03", "t01", "n01", "n03"],
     desarrollo_humano_1: ["m01", "m02"],
     desarrollo_humano_2: ["m01", "t01"],
-    desarrollo_humano_3: ["t01", "t02"],
-    desarrollo_humano_4: ["m01"]
+    desarrollo_humano_3: ["m01"]
 };
 
 // ==========================
@@ -101,15 +100,13 @@ function getSemesterKey(carrera, nroSemestre) {
             nroSemestreAcomodado = 3;
         }
     }
+    //Normalizacion para DH
     else if (carrera === "desarrollo_humano") {
         if (nroSemestre == 2 || nroSemestre >= 8) {
-            nroSemestreAcomodado = 4
-        }
-        else if (nroSemestre != 2 && nroSemestre != 1 && nroSemestre != 6) {
-            nroSemestreAcomodado = 2
-        }
-        else if (nroSemestre == 6) {
             nroSemestreAcomodado = 3
+        }
+        else if (nroSemestre > 2) {
+            nroSemestreAcomodado = 2
         }
     }
     return `${carreraAcomodada}_${nroSemestreAcomodado}`;
