@@ -137,7 +137,7 @@ function agregar_src(arr, carrera, semestre, variable) {
  */
 function getHorario() {
     // 1. Obtener selecciones del usuario
-    const carrera = document.getElementById("carreras").value;
+    var carrera = document.getElementById("carreras").value;
     const nro_semestre = document.getElementById("semestres").value;
     const semestre = nro_semestre + "_semestre";
     let src = [];
@@ -167,6 +167,9 @@ function getHorario() {
     agregar_src(src, carreraNombre, semestre, especifico);
 
     // 5. Construir HTML de resultados
+    if (carrera === "desarrollo_humano") {
+            carrera = "desarrollo humano"
+        }
     let htmlContent = `<h2 class="result-title">Horarios del ${nro_semestre}° semestre - ${carrera.toUpperCase()}</h2>`;
 
     for (let i = 0; i < especifico.length; i++) {
@@ -175,7 +178,7 @@ function getHorario() {
         if (carreraNombre === "administracion_contaduria") {
             carreraTexto = "administración o contaduría";
         }
-
+        
         htmlContent += `
             <div class="result-item">
                 <p>${especifico[i].toUpperCase()} del ${nro_semestre}° semestre en la carrera de ${carreraTexto.toUpperCase()}</p>
