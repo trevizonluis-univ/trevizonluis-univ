@@ -112,7 +112,6 @@ function getSemesterKey(carrera, nroSemestre) {
             nroSemestreAcomodado = 3
         }
     }
-    console.log(`${carreraAcomodada}_${nroSemestreAcomodado}`)
     return `${carreraAcomodada}_${nroSemestreAcomodado}`;
 }
 
@@ -154,10 +153,8 @@ function getHorario() {
 
     // 2. Generar clave normalizada
     const key = getSemesterKey(carrera, nro_semestre);
-    console.log(key)
     // 3. Recuperar códigos de horario
     const especifico = semestres_totales[key];
-    console.log(especifico)
 
     if (!especifico) {
         alert("No se encontraron horarios para esta combinación");
