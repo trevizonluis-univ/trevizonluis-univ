@@ -49,6 +49,14 @@ const semestres_totales = {
     desarrollo_humano_2: ["m01", "t01"],
     desarrollo_humano_3: ["m01"]
 };
+const decanato_carrera = {
+    dcee: ["", "economia", "administracion", "contaduria"],
+    deha: ["", "desarrollo_humano", "psicologia"],
+}
+const decanato_texto = {
+    dcee: ["N/A", "Economía", "Administración", "Contaduría"],
+    deha: ["N/A", "Desarrollo Humano", "Psicología"]
+}
 
 // ==========================
 // FUNCIONES DE INTERFAZ
@@ -119,10 +127,10 @@ function getSemesterKey(carrera, nroSemestre) {
  * @param {string} semestre - Semestre en formato "X_semestre"
  * @param {string[]} variable - Array de códigos de horario
  */
-function agregar_src(arr, carrera, semestre, variable) {
+function agregar_src(arr, decanato, carrera, semestre, variable) {
     for (let i = 0; i < variable.length; i++) {
         // Formato: horarios/[carrera]/[semestre]/[codigo].png
-        arr.push("horarios/" + carrera + "/" + semestre + "/" + variable[i] + ".png");
+        arr.push("horarios/" + decanato + "/" + carrera + "/" + semestre + "/" + variable[i] + ".png");
     }
 }
 
@@ -139,12 +147,13 @@ function getHorario() {
     // 1. Obtener selecciones del usuario
     var carrera = document.getElementById("carreras").value;
     const nro_semestre = document.getElementById("semestres").value;
+    const decanato = document.getElementById("decanatos").value;
     const semestre = nro_semestre + "_semestre";
     let src = [];
 
     // Validación básica
-    if (carrera === "n/a" || nro_semestre === "n/a") {
-        alert("Por favor, seleccione una carrera y un semestre");
+    if (carrera === "n/a" || nro_semestre === "n/a" || decanato === "n/a") {
+        alert("Por favor, seleccione una carrera, un decanato o un semestre");
         return;
     }
 
@@ -164,12 +173,12 @@ function getHorario() {
     if ((carrera === "administracion" || carrera === "contaduria") && nro_semestre <= 5) {
         carreraNombre = "administracion_contaduria";
     }
-    agregar_src(src, carreraNombre, semestre, especifico);
+    agregar_src(src, decanato, carreraNombre, semestre, especifico);
 
     // 5. Construir HTML de resultados
     if (carrera === "desarrollo_humano") {
-            carrera = "desarrollo humano"
-        }
+        carrera = "desarrollo humano"
+    }
     let htmlContent = `<h2 class="result-title">Horarios del ${nro_semestre}° semestre - ${carrera.toUpperCase()}</h2>`;
 
     for (let i = 0; i < especifico.length; i++) {
@@ -178,7 +187,7 @@ function getHorario() {
         if (carreraNombre === "administracion_contaduria") {
             carreraTexto = "administración o contaduría";
         }
-        
+
         htmlContent += `
             <div class="result-item">
                 <p>${especifico[i].toUpperCase()} del ${nro_semestre}° semestre en la carrera de ${carreraTexto.toUpperCase()}</p>
@@ -245,4 +254,24 @@ function autodesarrollos() {
             `;
 
     document.getElementById("horarios").innerHTML = htmlContent;
+}
+
+//Funcion para mostrar cada carrera en cada decanato por separado
+
+function cargarCarreras() {
+    var decanato = document.getElementById("decanatos").value
+    var carrera = document.getElementById("carreras");
+    var carreras_value = decanato_carrera[decanato]
+    var carreras_texto = decanato_texto[decanato]
+    carrera.innerHTML = "";
+    if (carreras_value === undefined) {
+        carrera.innerHTML = `<option value="n/a">N/A</option>`;
+        return;
+    }
+    for (let i = 0; i < carreras_value.length; i++) {
+        const element = document.createElement("option");
+        element.value = carreras_value[i];
+        element.text = carreras_texto[i];
+        carrera.appendChild(element);
+    }
 }

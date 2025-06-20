@@ -32,16 +32,19 @@
                 EXISTIR CONFUSIONES Y MALENTENDIDOS<br>
                 NO ES OFICIAL
             </div>
-            <p class="creator-note"><i class="fas fa-info-circle"></i> <span class="creator-name">Ideado por: Luis Trevizon</span></p>
+            <p class="creator-note"><i class="fas fa-info-circle"></i> <span class="creator-name">Ideado por: Luis
+                    Trevizon</span></p>
             <div class="controls-section">
                 <div class="form-group">
+                    <label for="decanatos"><i class="fa-solid fa-building"></i></i> Escoja su decanato</label>
+                    <select class="form-control" name="decanatos" id="decanatos" onchange="cargarCarreras()">
+                        <option value="n/a">Seleccione un decanato</option>
+                        <option value="dcee">DCEE</option>
+                        <option value="deha">DEHA</option>
+                    </select>
                     <label for="carreras"><i class="fas fa-graduation-cap"></i> Escoja su carrera</label>
                     <select class="form-control" name="carrera" id="carreras">
                         <option value="n/a">Seleccione una carrera</option>
-                        <option value="economia">Economia</option>
-                        <option value="administracion">Administracion</option>
-                        <option value="contaduria">Contaduria</option>
-                        <option value="desarrollo_humano">Desarrollo Humano</option>
                     </select>
                 </div>
 
