@@ -50,7 +50,7 @@ async function getAnimalito() {
     new_data = { url: data[0].url, width: data[0].width, height: data[0].height }
     return new_data;
 }
-var mantenimiento = false
+var mantenimiento = true
 const decanatos_carreras = {
     dcee: {
         economia_1: ["m01", "m02", "t01", "t02"],
