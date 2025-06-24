@@ -34,6 +34,21 @@
 const token_cat = "live_OrGbCjsfy5Bxz6Eq3RGWv41xJBwDBGAFOEmhQXSKv8V3mBhv3kryyi6GEolyZsiM"
 const token_dog = "live_ntTQz8hs76V8ThY32a5kRjR8TvFgbx9Vg0tnP8BuI8fkKzMlCMtoRHmdkirqCU9D"
 
+async function mantenimiento() {
+    alert("El sistema se encuentra en mantenimiento. Por favor, intente más tarde.");
+    img = await getAnimalito();
+    document.getElementById("horarios").innerHTML = `
+        <div class="empty-result">
+            <i class="fas fa-tools" 
+                style="font-size: 3rem; color: var(--warning); margin-bottom: 15px;">
+            </i>
+            <p>El sistema se encuentra en mantenimiento</p>
+            <p class="creator-note">Por favor, intente más tarde</p>
+            <img src="${img.url}"style="width: 35%; height: auto;">
+            <p>Animalito de mantenimiento</p>
+        </div>
+    `;
+}
 async function getAnimalito() {
     var animal = ["cat", "dog"]
     var random = Math.floor(Math.random() * animal.length);
@@ -50,7 +65,8 @@ async function getAnimalito() {
     new_data = { url: data[0].url, width: data[0].width, height: data[0].height }
     return new_data;
 }
-var mantenimiento = true
+var mantenimiento_dcee = true
+var mantenimiento_deha = true
 const decanatos_carreras = {
     dcee: {
         economia_1: ["m01", "m02", "t01", "t02"],
@@ -180,79 +196,71 @@ function agregar_src(arr, decanato, carrera, semestre, variable) {
  * 4. Construye rutas de imágenes
  * 5. Genera y muestra HTML con resultados
  */
-async function getHorario() {
-    if (!mantenimiento) {
-        // 1. Obtener selecciones del usuario
-        var carrera = document.getElementById("carreras").value;
-        const nro_semestre = document.getElementById("semestres").value;
-        const decanato = document.getElementById("decanatos").value;
-        const semestre = nro_semestre + "_semestre";
-        let src = [];
+function getHorario() {
+    // 1. Obtener selecciones del usuario
+    var carrera = document.getElementById("carreras").value;
+    const nro_semestre = document.getElementById("semestres").value;
+    const decanato = document.getElementById("decanatos").value;
+    const semestre = nro_semestre + "_semestre";
+    let src = [];
+    if (mantenimiento_dcee && decanato === "dcee") {
+        mantenimiento();
+        return;
+    }
+    if (mantenimiento_deha && decanato === "deha") {
+        mantenimiento();
+        return;
+    }
+    // Validación básica
+    if (carrera === "n/a" || nro_semestre === "n/a" || decanato === "n/a") {
+        alert("Por favor, seleccione una carrera, un decanato o un semestre");
+        return;
+    }
 
-        // Validación básica
-        if (carrera === "n/a" || nro_semestre === "n/a" || decanato === "n/a") {
-            alert("Por favor, seleccione una carrera, un decanato o un semestre");
-            return;
+    // 2. Generar clave normalizada
+    const key = getSemesterKey(carrera, nro_semestre);
+    // 3. Recuperar códigos de horario
+    console.log("Clave generada:", key);
+    console.log("Decanato:", decanato)
+    var especifico = decanatos_carreras[decanato][key];
+    console.log("Códigos de horario encontrados:", especifico);
+    if (!especifico) {
+        alert("No se encontraron horarios para esta combinación");
+        return;
+    }
+
+    // 4. Construir rutas de imágenes
+    let carreraNombre = carrera;
+    // Normalizar nombre para rutas de archivo
+    if ((carrera === "administracion" || carrera === "contaduria") && nro_semestre <= 5) {
+        carreraNombre = "administracion_contaduria";
+    }
+    agregar_src(src, decanato, carreraNombre, semestre, especifico);
+
+    // 5. Construir HTML de resultados
+    if (carrera === "desarrollo_humano") {
+        carrera = "desarrollo humano"
+    }
+    let htmlContent = `<h2 class="result-title">Horarios del ${nro_semestre}° semestre - ${carrera.toUpperCase()}</h2>`;
+
+    for (let i = 0; i < especifico.length; i++) {
+        let carreraTexto = carrera;
+        // Ajustar texto para mostrar al usuario
+        if (carreraNombre === "administracion_contaduria") {
+            carreraTexto = "administración o contaduría";
         }
 
-        // 2. Generar clave normalizada
-        const key = getSemesterKey(carrera, nro_semestre);
-        // 3. Recuperar códigos de horario
-        console.log("Clave generada:", key);
-        console.log("Decanato:", decanato)
-        var especifico = decanatos_carreras[decanato][key];
-        console.log("Códigos de horario encontrados:", especifico);
-        if (!especifico) {
-            alert("No se encontraron horarios para esta combinación");
-            return;
-        }
-
-        // 4. Construir rutas de imágenes
-        let carreraNombre = carrera;
-        // Normalizar nombre para rutas de archivo
-        if ((carrera === "administracion" || carrera === "contaduria") && nro_semestre <= 5) {
-            carreraNombre = "administracion_contaduria";
-        }
-        agregar_src(src, decanato, carreraNombre, semestre, especifico);
-
-        // 5. Construir HTML de resultados
-        if (carrera === "desarrollo_humano") {
-            carrera = "desarrollo humano"
-        }
-        let htmlContent = `<h2 class="result-title">Horarios del ${nro_semestre}° semestre - ${carrera.toUpperCase()}</h2>`;
-
-        for (let i = 0; i < especifico.length; i++) {
-            let carreraTexto = carrera;
-            // Ajustar texto para mostrar al usuario
-            if (carreraNombre === "administracion_contaduria") {
-                carreraTexto = "administración o contaduría";
-            }
-
-            htmlContent += `
+        htmlContent += `
             <div class="result-item">
                 <p>${especifico[i].toUpperCase()} del ${nro_semestre}° semestre en la carrera de ${carreraTexto.toUpperCase()}</p>
                 <img src="${src[i]}" alt="Horario ${especifico[i]}">
             </div>
             <hr class="hr-divider">
         `;
-        }
-
-        // Mostrar resultados
-        document.getElementById("horarios").innerHTML = htmlContent;
-    } else {
-        alert("El sistema se encuentra en mantenimiento. Por favor, intente más tarde.");
-        img = await getAnimalito();
-        document.getElementById("horarios").innerHTML = `
-            <div class="empty-result">
-                <i class="fas fa-tools" 
-                   style="font-size: 3rem; color: var(--warning); margin-bottom: 15px;"></i>
-                <p>El sistema se encuentra en mantenimiento</p>
-                <p class="creator-note">Por favor, intente más tarde</p>
-                <img src="${img.url}"style="width: 300px; height: auto;">
-                <p>Animalito de mantenimiento</p>
-            </div>
-        `;
     }
+
+    // Mostrar resultados
+    document.getElementById("horarios").innerHTML = htmlContent;
 
 }
 
@@ -260,7 +268,7 @@ async function getHorario() {
  * Redirige a la página de creación de horarios personalizados
  */
 function irHorario() {
-    window.location.href = "horario.html";
+  window.open("horario.html", "_blank");
 }
 
 /**
@@ -269,26 +277,28 @@ function irHorario() {
  * - Construye ruta de imagen según carrera seleccionada
  * - Genera y muestra HTML con resultados
  */
-async function electivas() {
-    if (!mantenimiento) {
-        const carrera = document.getElementById("electiva").value;
+function electivas() {
+    const carrera = document.getElementById("electiva").value;
+    if (mantenimiento_dcee) {
+        mantenimiento();
+        return;
+    }
+    // Validación
+    if (carrera === "n/a") {
+        alert("Por favor, seleccione una carrera para ver las electivas");
+        return;
+    }
 
-        // Validación
-        if (carrera === "n/a") {
-            alert("Por favor, seleccione una carrera para ver las electivas");
-            return;
-        }
+    // Mapear valor interno a nombre legible
+    let carreraTexto = "";
+    if (carrera === "admin_cont") {
+        carreraTexto = "administración y contaduría";
+    } else {
+        carreraTexto = "economía";
+    }
 
-        // Mapear valor interno a nombre legible
-        let carreraTexto = "";
-        if (carrera === "admin_cont") {
-            carreraTexto = "administración y contaduría";
-        } else {
-            carreraTexto = "economía";
-        }
-
-        // Construir HTML
-        const htmlContent = `
+    // Construir HTML
+    const htmlContent = `
         <h2 class="result-title">Electivas de ${carreraTexto.toUpperCase()}</h2>
                 <div class="result-item">
                     <p>Electivas para la carrera de ${carreraTexto.toUpperCase()}</p>
@@ -296,27 +306,16 @@ async function electivas() {
                 </div>
             `;
 
-        document.getElementById("horarios").innerHTML = htmlContent;
-    } else {
-        alert("El sistema se encuentra en mantenimiento. Por favor, intente más tarde.");
-        img = await getAnimalito();
-        document.getElementById("horarios").innerHTML = `
-            <div class="empty-result">
-                <i class="fas fa-tools" 
-                   style="font-size: 3rem; color: var(--warning); margin-bottom: 15px;"></i>
-                <p>El sistema se encuentra en mantenimiento</p>
-                <p class="creator-note">Por favor, intente más tarde</p>
-                <img src="${img.url}"style="width: 300px; height: auto;">
-                <p>Animalito de mantenimiento</p>
-            </div>
-        `;
-    }
+    document.getElementById("horarios").innerHTML = htmlContent;
 }
 
 // Función para mostrar autodesarrollos
 async function autodesarrollos() {
-    if (!mantenimiento) {
-        const htmlContent = `
+    if (mantenimiento_dcee) {
+        mantenimiento();
+        return;
+    }
+    const htmlContent = `
                 <h2 class="result-title">Autodesarrollos</h2>
                 <div class="result-item">
                     <p>Horarios de autodesarrollos</p>
@@ -324,22 +323,7 @@ async function autodesarrollos() {
                 </div>
             `;
 
-        document.getElementById("horarios").innerHTML = htmlContent;
-    } else {
-        alert("El sistema se encuentra en mantenimiento. Por favor, intente más tarde.");
-        img = await getAnimalito();
-        document.getElementById("horarios").innerHTML = `
-            <div class="empty-result">
-                <i class="fas fa-tools" 
-                   style="font-size: 3rem; color: var(--warning); margin-bottom: 15px;"></i>
-                <p>El sistema se encuentra en mantenimiento</p>
-                <p class="creator-note">Por favor, intente más tarde</p>
-                <img src="${img.url}"style="width: 300px; height: auto;">
-                <p>Animalito de mantenimiento</p>
-            </div>
-        `;
-    }
-
+    document.getElementById("horarios").innerHTML = htmlContent;
 }
 
 //Funcion para mostrar cada carrera en cada decanato por separado
