@@ -63,9 +63,9 @@ async function getAnimalito() {
         throw new Error("Error al obtener la imagen del gato: " + response.statusText);
     }
     const data = await response.json();
-    new_data = { 
-        url: data[0].url, 
-        width: data[0].width, 
+    new_data = {
+        url: data[0].url,
+        width: data[0].width,
         height: data[0].height,
         tipo_animal: animal[random],
     }
@@ -77,11 +77,11 @@ const decanatos_carreras = {
     dcee: {
         economia_1: ["m01", "m02", "t01", "t02"],
         economia_2: ["m01", "t01"],
-        administracion_contaduria_1: ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "t01", "t02", "t03", "n01", "n02"],
-        administracion_contaduria_2: ["m01", "m02", "m03", "m04", "t01", "t02", "t03", "n01", "n02", "n03"],
-        administracion_contaduria_3: ["m01", "m02", "m03", "t01", "t02", "n01", "n02"],
+        administracion_contaduria_1: ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09", "m10", "t01", "t02", "t03", "n01", "n02"],
+        administracion_contaduria_2: ["m01", "m02", "m03", "m04", "m05", "t01", "t02", "t03", "n01", "n02", "n03", "n04", "n05"],
+        administracion_contaduria_3: ["m01", "m02", "m03", "t01", "t02", "n01", "n02", "n03"],
         administracion_contaduria_4: ["m01", "m02", "m03", "t01", "n01", "n02"],
-        administracion_contaduria_5: ["m01", "m02", "m03", "t02", "n01", "n02", "n03"],
+        administracion_contaduria_5: ["m01", "m02", "n01", "n02", "n03"],
         administracion_contaduria_6: ["m01", "m02", "m03", "n01", "n02"],
         administracion_contaduria_7: ['m01', "m02", "t01", 'n01', 'n02'],
         administracion_contaduria_8: ['m01', "m02", "m03", 'n01', 'n02', 'n03', 'n04'],
@@ -276,7 +276,7 @@ function getHorario() {
  * Redirige a la página de creación de horarios personalizados
  */
 function irHorario() {
-  window.open("horario.html", "_blank");
+    window.open("horario.html", "_blank");
 }
 
 /**
