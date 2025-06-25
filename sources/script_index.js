@@ -71,13 +71,12 @@ async function getAnimalito() {
     }
     return new_data;
 }
-var mantenimiento_dcee = true
+var mantenimiento_dcee = false
 var mantenimiento_deha = true
 const decanatos_carreras = {
     dcee: {
         economia_1: ["m01", "m02", "t01", "t02"],
-        economia_2: ["m01", "m02", "t01"],
-        economia_3: ["m01", "t01"],
+        economia_2: ["m01", "t01"],
         administracion_contaduria_1: ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "t01", "t02", "t03", "n01", "n02"],
         administracion_contaduria_2: ["m01", "m02", "m03", "m04", "t01", "t02", "t03", "n01", "n02", "n03"],
         administracion_contaduria_3: ["m01", "m02", "m03", "t01", "t02", "n01", "n02"],
@@ -154,8 +153,11 @@ function getSemesterKey(carrera, nroSemestre) {
     }
     // Normalización para economía
     else if (carrera === "economia") {
+        if (nroSemestre <= 2) {
+            nroSemestreAcomodado = 1
+        }
         if (nroSemestre >= 3) {
-            nroSemestreAcomodado = 3;
+            nroSemestreAcomodado = 2;
         }
     }
     //Normalizacion para DH
