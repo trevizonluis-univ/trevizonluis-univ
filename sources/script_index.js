@@ -44,8 +44,9 @@ async function mantenimiento() {
             </i>
             <p>El sistema se encuentra en mantenimiento</p>
             <p class="creator-note">Por favor, intente más tarde</p>
-            <img src="${img.url}"style="width: 35%; height: auto;">
-            <p>Animalito de mantenimiento</p>
+            <img class="animalito" src="${img.url}">
+            <br>
+            <p class="animalito-caption ${img.tipo_animal}-caption">Animalito de mantenimiento</p>
         </div>
     `;
 }
@@ -62,7 +63,12 @@ async function getAnimalito() {
         throw new Error("Error al obtener la imagen del gato: " + response.statusText);
     }
     const data = await response.json();
-    new_data = { url: data[0].url, width: data[0].width, height: data[0].height }
+    new_data = { 
+        url: data[0].url, 
+        width: data[0].width, 
+        height: data[0].height,
+        tipo_animal: animal[random],
+    }
     return new_data;
 }
 var mantenimiento_dcee = true

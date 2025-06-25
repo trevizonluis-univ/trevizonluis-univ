@@ -27,12 +27,17 @@
 
         <main class="main-content">
             <!-- Aviso importante sobre recarga de página -->
-             <p class="creator-note"><i class="fas fa-info-circle"></i> <span class="creator-name">Ideado por: Luis Trevizon</span></p>
-            <div class="info-box" style="background: #fff3cd; border-left: 5px solid #ffc107; color: #856404; margin-bottom: 25px;">
-                <i class="fas fa-exclamation-triangle" style="margin-right: 10px; color: #ffc107;"></i>
-                <strong>¡Importante!</strong> Si recarga esta página, puede perder la información del horario generado. 
-                Para conservar su horario, se reocmienda utilizar la función de impresión o tome una captura de pantalla.
-                <br> NO ES OFICIAL
+            <p class="creator-note"><i class="fas fa-info-circle"></i> <span class="creator-name">Ideado por: Luis
+                    Trevizon</span></p>
+            <div class="info-box warning"><i class="fas fa-exclamation-triangle warning-icon"></i>
+                <strong>¡Importante!</strong> Si recarga esta página, puede perder la información del horario generado.
+                Para conservar su horario, se reocmienda utilizar la función de impresión o tome una captura de
+                pantalla.
+                <br> NO ES OFICIAL<br>
+                <a class="important-link" target="_blank" href="https://www.youtube.com/watch?v=4lh2IbDsCBs">
+                    (Si no sabe como activar el modo computadora o
+                    escritorio, haga click aquí)
+                </a>
             </div>
 
             <!-- Información de generación -->
@@ -79,73 +84,74 @@
     <!-- Estilos adicionales para impresión -->
     <style>
         @media print {
+
             .controls-section,
             .info-box:first-of-type,
             .creator-note,
             .schedule-footer {
                 display: none !important;
             }
-            
+
             body {
                 background: white !important;
                 padding: 0 !important;
             }
-            
+
             .container {
                 box-shadow: none !important;
                 border-radius: 0 !important;
             }
-            
+
             .header {
                 background: var(--ucla-blue) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            
+
             .turno-header {
                 background: var(--ucla-blue) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            
+
             .filled-cell {
                 background-color: #d1ecf1 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            
+
             table {
                 page-break-inside: avoid;
             }
-            
+
             .turno-section {
                 page-break-inside: avoid;
                 margin-bottom: 30px;
             }
         }
-        
+
         /* Mejoras visuales adicionales */
         .info-box i {
             font-size: 1.1em;
         }
-        
+
         .btn i {
             font-size: 1.1em;
         }
-        
+
         /* Efecto hover mejorado para botones */
         .btn:hover i {
             transform: scale(1.1);
             transition: transform 0.2s ease;
         }
-        
+
         /* Responsividad mejorada para botones */
         @media (max-width: 768px) {
             .button-group {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
-            
+
             .btn {
                 width: 100%;
                 justify-content: center;

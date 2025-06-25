@@ -402,6 +402,19 @@ select.form-control {
         margin: 0 auto;
         overflow: visible
     }
+
+    .animalito {
+        width: 200px !important;
+        height: auto !important;
+        min-width: 90% !important;
+
+    }
+}
+
+.animalito {
+    width: 200px;
+    height: auto;
+
 }
 
 /* Tablet en horizontal - mejor visualización de imágenes */
@@ -413,5 +426,154 @@ select.form-control {
     .logo {
         width: 80px;
         height: 80px;
+    }
+}
+
+.animalito-caption {
+    display: inline-block;
+    background-color: #f8f9fa;
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin: 15px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Efecto decorativo */
+.animalito-caption::before {
+    content: "🐾";
+    margin-right: 8px;
+}
+
+/* Cambio de color según animal */
+.cat-caption {
+    /* Si es gato */
+    border-left: 4px solid #ff6b6b;
+}
+
+.dog-caption {
+    /* Si es perro */
+    border-left: 4px solid #4d96ff;
+}
+
+/* Estilo base para todos los enlaces */
+a {
+    color: var(--ucla-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 2px 4px;
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Efecto hover - subrayado animado */
+a:hover {
+    color: var(--ucla-blue);
+    background-color: rgba(26, 58, 108, 0.05);
+}
+
+a:hover::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    bottom: 0;
+    width: calc(100% - 8px);
+    height: 2px;
+    background: var(--ucla-gold);
+    transform-origin: left;
+    animation: underline 0.3s ease forwards;
+}
+
+@keyframes underline {
+    from {
+        transform: scaleX(0)
+    }
+
+    to {
+        transform: scaleX(1)
+    }
+}
+
+/* Enlaces en contexto de navegación */
+nav a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 8px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Enlaces en botones */
+.btn a {
+    color: inherit !important;
+    display: block;
+    padding: 14px 20px;
+    border-radius: 8px;
+    background: transparent;
+}
+
+/* Enlaces en resultados */
+.result-item a {
+    color: var(--ucla-blue);
+    border-bottom: 1px dashed var(--ucla-gold);
+    padding-bottom: 2px;
+}
+
+.result-item a:hover {
+    background-color: var(--light-blue);
+    border-bottom-style: solid;
+}
+
+/* Enlaces en footer */
+footer a {
+    color: var(--ucla-gold);
+    font-weight: 500;
+}
+
+footer a:hover {
+    color: white;
+    background-color: var(--ucla-gold);
+}
+
+/* Enlaces en estado activo */
+a:active {
+    transform: translateY(1px);
+}
+
+/* Enlaces visitados */
+a:visited {
+    color: #4a3a8c;
+    /* Tono púrpura oscuro */
+}
+
+/* Enlaces en modo móvil */
+@media (max-width: 768px) {
+    a {
+        padding: 2px 0;
+    }
+
+    nav a {
+        display: block;
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    .btn a {
+        padding: 10px 12px;
+    }
+
+    a:hover::after {
+        display: none;
     }
 }
