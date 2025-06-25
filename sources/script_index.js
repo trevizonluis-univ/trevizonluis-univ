@@ -148,7 +148,7 @@ function getSemesterKey(carrera, nroSemestre) {
 
     // Normalización para administración/contaduría
     if (carrera === "administracion" || carrera === "contaduria") {
-        if (nroSemestre < 9 && nroSemestre !== 7) {
+        if (nroSemestre <= 6 || nroSemestre == 8) {
             carreraAcomodada = "administracion_contaduria";
         }
     }
