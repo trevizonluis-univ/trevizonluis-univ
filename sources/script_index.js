@@ -83,7 +83,8 @@ const decanatos_carreras = {
         administracion_contaduria_4: ["m01", "m02", "m03", "t01", "n01", "n02"],
         administracion_contaduria_5: ["m01", "m02", "n01", "n02", "n03"],
         administracion_contaduria_6: ["m01", "m02", "m03", "n01", "n02"],
-        administracion_contaduria_7: ['m01', "m02", "t01", 'n01', 'n02'],
+        contaduria_7: ['m01', "m02", 'n01', 'n02'],
+        administracion_7: ['m01', "m02", "t01", 'n01', 'n02'],
         administracion_contaduria_8: ['m01', "m02", "m03", 'n01', 'n02', 'n03', 'n04'],
         contaduria_9: ["m01", "m02", "m03", "n01", "n02", "n03"],
         administracion_9: ["m01", "m02", "m03", "t01", "n01", "n03"],
@@ -147,7 +148,7 @@ function getSemesterKey(carrera, nroSemestre) {
 
     // Normalización para administración/contaduría
     if (carrera === "administracion" || carrera === "contaduria") {
-        if (nroSemestre < 9) {
+        if (nroSemestre < 9 && nroSemestre !== 7) {
             carreraAcomodada = "administracion_contaduria";
         }
     }
