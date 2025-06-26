@@ -416,7 +416,7 @@ function GenerateScheduleContent() {
 
     // Guardar en sessionStorage y redirigir
     sessionStorage.setItem('scheduleContent', scheduleHTML);
-    sessionStorage.setItem('generationDate', new Date().toLocaleString('es-ES'));
+    sessionStorage.setItem('generationDate', new Date().toLocaleString('es-VE'));
     
     // Redirigir a la página de visualización
     window.location.href = 'horario_generado.html';
