@@ -170,6 +170,7 @@ function cambia_turnos() {
 function registrar() {
     // 1. Recoger datos del formulario
     const materia = document.getElementById('materia').value.trim();
+    const seccion = document.getElementById('seccion').value.trim();
     const dia = parseInt(document.getElementById('dia').value);
     const profesor = document.getElementById('prof_nom').value.trim();
     const salon = document.getElementById('salon_num').value.trim();
@@ -225,6 +226,7 @@ function registrar() {
         materia: materia,
         profesor: profesor || 'N/A',
         salon: salon || 'N/A',
+        seccion,
         entrada,
         salida
     };
@@ -296,6 +298,7 @@ function actualizarTablaTurno(turno) {
                 td.innerHTML = `
                     <div>
                         <div class="event-title">${evento.materia}</div>
+                        <div>Sección: ${evento.seccion}</div>
                         <div>Prof: ${evento.profesor}</div>
                         <div>Salón: ${evento.salon}</div>
                     </div>
@@ -324,6 +327,7 @@ function limpiarFormulario() {
     document.getElementById('materia').value = '';
     document.getElementById('prof_nom').value = '';
     document.getElementById('salon_num').value = '';
+    document.getElementById('seccion').value = '';
     document.getElementById('hora_entrada').value = '';
     document.getElementById('hora_salida').value = '';
     document.getElementById('dia').value = '';
