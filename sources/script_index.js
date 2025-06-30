@@ -324,6 +324,11 @@ async function autodesarrollos() {
         mantenimiento();
         return;
     }
+    var autodesarollo=false
+    if (autodesarollo==false) {
+        mantenimiento()
+        return
+    }
     const htmlContent = `
                 <h2 class="result-title">Autodesarrollos</h2>
                 <div class="result-item">
