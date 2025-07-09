@@ -127,9 +127,18 @@ function limpiar() {
             <p class="creator-note">Utilice los controles para realizar una nueva búsqueda</p>
         </div>
     `;
+    // Mantener el decanato seleccionado
+    const decanatoSeleccionado = document.getElementById("decanatos").value;
+    
+    // Resetear solo controles dependientes
     document.getElementById("carreras").value = "n/a";
     document.getElementById("semestres").value = "n/a";
     document.getElementById("electiva").value = "n/a";
+    
+    // Recargar carreras según decanato actual
+    if (decanatoSeleccionado !== "n/a") {
+        cargarCarreras();
+    }
 }
 
 /**
